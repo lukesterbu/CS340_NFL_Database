@@ -12,7 +12,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -21,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `cs340_burrisl`
 --
+
+-- --------------------------------------------------------
+
+-- 
+-- Drop tables if they exist
+--
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `coach`;
+DROP TABLE IF EXISTS `seasonStatistics`;
+DROP TABLE IF EXISTS `sponsoredPlayers`;
+DROP TABLE IF EXISTS `player`;
+DROP TABLE IF EXISTS `team`;
+DROP TABLE IF EXISTS `corporateSponsor`;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- --------------------------------------------------------
 
@@ -131,8 +145,6 @@ CREATE TABLE `sponsoredPlayers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
-
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
