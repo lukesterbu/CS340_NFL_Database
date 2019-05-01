@@ -11,8 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-SET FOREIGN_KEY_CHECKS = 0;
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,11 +23,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 -- --------------------------------------------------------
 
+-- 
+-- Drop tables if they exist
+--
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `team`;
+DROP TABLE IF EXISTS `coach`;
+DROP TABLE IF EXISTS `corporateSponsor`;
+DROP TABLE IF EXISTS `player`;
+DROP TABLE IF EXISTS `seasonStatistics`;
+DROP TABLE IF EXISTS `sponsoredPlayers`;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `team`
 --
 
-DROP TABLE IF EXISTS `team`;
 CREATE TABLE `team` (
   `teamID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -48,7 +60,6 @@ CREATE TABLE `team` (
 -- Table structure for table `coach`
 --
 
-DROP TABLE IF EXISTS `coach`;
 CREATE TABLE `coach` (
   `coachID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
@@ -66,7 +77,6 @@ CREATE TABLE `coach` (
 -- Table structure for table `corporateSponsor`
 --
 
-DROP TABLE IF EXISTS `corporateSponsor`;
 CREATE TABLE `corporateSponsor` (
   `sponsorID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -80,7 +90,6 @@ CREATE TABLE `corporateSponsor` (
 -- Table structure for table `player`
 --
 
-DROP TABLE IF EXISTS `player`;
 CREATE TABLE `player` (
   `playerID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
@@ -100,7 +109,6 @@ CREATE TABLE `player` (
 -- Table structure for table `seasonStatistics`
 --
 
-DROP TABLE IF EXISTS `seasonStatistics`;
 CREATE TABLE `seasonStatistics` (
   `playerID` int(11) NOT NULL,
   `year` int(11) NOT NULL,
@@ -127,7 +135,6 @@ CREATE TABLE `seasonStatistics` (
 -- Table structure for table `sponsoredPlayers`
 --
 
-DROP TABLE IF EXISTS `sponsoredPlayers`;
 CREATE TABLE `sponsoredPlayers` (
   `playerID` int(11) NOT NULL,
   `sponsorID` int(11) NOT NULL,
@@ -138,8 +145,6 @@ CREATE TABLE `sponsoredPlayers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
-
-SET FOREIGN_KEY_CHECKS = 1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
