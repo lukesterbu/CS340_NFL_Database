@@ -140,8 +140,8 @@ CREATE TABLE `sponsoredPlayers` (
   `sponsorID` int(11) NOT NULL,
   PRIMARY KEY (`playerID`,`sponsorID`),
   KEY `sponsorID` (`sponsorID`),
-  CONSTRAINT `sponsoredPlayers_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `sponsoredPlayers_ibfk_2` FOREIGN KEY (`sponsorID`) REFERENCES `corporateSponsor` (`sponsorID`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `sponsoredPlayers_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON UPDATE CASCADE,
+  CONSTRAINT `sponsoredPlayers_ibfk_2` FOREIGN KEY (`sponsorID`) REFERENCES `corporateSponsor` (`sponsorID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
