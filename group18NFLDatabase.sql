@@ -28,6 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `team`
 --
 
+DROP TABLE IF EXISTS `team`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team` (
   `teamID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -46,6 +49,9 @@ CREATE TABLE `team` (
 -- Table structure for table `coach`
 --
 
+DROP TABLE IF EXISTS `coach`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `coach` (
   `coachID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
@@ -63,6 +69,9 @@ CREATE TABLE `coach` (
 -- Table structure for table `corporateSponsor`
 --
 
+DROP TABLE IF EXISTS `corporateSponsor`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `corporateSponsor` (
   `sponsorID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -76,6 +85,9 @@ CREATE TABLE `corporateSponsor` (
 -- Table structure for table `player`
 --
 
+DROP TABLE IF EXISTS `player`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `player` (
   `playerID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
@@ -95,6 +107,9 @@ CREATE TABLE `player` (
 -- Table structure for table `seasonStatistics`
 --
 
+DROP TABLE IF EXISTS `seasonStatistics`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seasonStatistics` (
   `playerID` int(11) NOT NULL,
   `year` int(11) NOT NULL,
@@ -121,6 +136,9 @@ CREATE TABLE `seasonStatistics` (
 -- Table structure for table `sponsoredPlayers`
 --
 
+DROP TABLE IF EXISTS `sponsoredPlayers`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sponsoredPlayers` (
   `playerID` int(11) NOT NULL,
   `sponsorID` int(11) NOT NULL,
