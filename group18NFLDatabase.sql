@@ -126,7 +126,7 @@ CREATE TABLE `seasonStatistics` (
   `sacks` int(11) DEFAULT NULL,
   `interceptions` int(11) DEFAULT NULL,
   PRIMARY KEY (`playerID`,`year`),
-  CONSTRAINT `seasonStatistics_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `seasonStatistics_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
