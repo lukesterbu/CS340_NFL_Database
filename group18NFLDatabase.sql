@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `coach`;
 DROP TABLE IF EXISTS `seasonStatistics`;
-DROP TABLE IF EXISTS `player`;
 DROP TABLE IF EXISTS `corporateSponsor`;
 DROP TABLE IF EXISTS `team`;
 DROP TABLE IF EXISTS `sponsoredPlayers`;
+DROP TABLE IF EXISTS `player`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- --------------------------------------------------------
