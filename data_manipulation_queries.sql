@@ -175,3 +175,8 @@ SET    firstname = :firstname,
        weight = :weight, 
        teamid = :teamid 
 WHERE  playerid = :playerID; 
+
+-- query to search for player by first or last name
+select * from player
+WHERE firstName LIKE CONCAT ('%', :firstNameSearchTerm, '%')
+OR lastName LIKE CONCAT ('%', :lastNameSearchTerm, '%');
