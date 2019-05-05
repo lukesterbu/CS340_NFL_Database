@@ -126,7 +126,7 @@ CREATE TABLE `seasonStatistics` (
   `sacks` int(11) DEFAULT NULL,
   `interceptions` int(11) DEFAULT NULL,
   PRIMARY KEY (`playerID`,`year`),
-  CONSTRAINT `seasonStatistics_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON UPDATE CASCADE
+  CONSTRAINT `seasonStatistics_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -140,8 +140,8 @@ CREATE TABLE `sponsoredPlayers` (
   `sponsorID` int(11) NOT NULL,
   PRIMARY KEY (`playerID`,`sponsorID`),
   KEY `sponsorID` (`sponsorID`),
-  CONSTRAINT `sponsoredPlayers_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON UPDATE CASCADE,
-  CONSTRAINT `sponsoredPlayers_ibfk_2` FOREIGN KEY (`sponsorID`) REFERENCES `corporateSponsor` (`sponsorID`) ON UPDATE CASCADE
+  CONSTRAINT `sponsoredPlayers_ibfk_1` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`) ON DELETE CASCADE,
+  CONSTRAINT `sponsoredPlayers_ibfk_2` FOREIGN KEY (`sponsorID`) REFERENCES `corporateSponsor` (`sponsorID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
