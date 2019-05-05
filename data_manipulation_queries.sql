@@ -177,6 +177,7 @@ SET    firstname = :firstname,
 WHERE  playerid = :playerID; 
 
 -- query to search for player by first or last name
+-- with colon : character being used to denote the variables that will have data from the backend programming 
 select * from player
 WHERE firstName LIKE CONCAT ('%', :firstNameSearchTerm, '%')
 OR lastName LIKE CONCAT ('%', :lastNameSearchTerm, '%');
