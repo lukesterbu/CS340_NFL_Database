@@ -429,7 +429,7 @@ INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns
 INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (194,2018,156,'722',0);
 INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (86,2018,143,'685',6);
 INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (49,2018,138,'645',6);
-INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (2,2018,118,'641',3);
+INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (98,2018,118,'641',3);
 INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (7,2018,133,'615',2);
 INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (164,2018,140,'578',6);
 INSERT INTO seasonStatistics(playerID,year,rushes,rushingYards,rushingTouchdowns) VALUES (149,2018,106,'554',3);
