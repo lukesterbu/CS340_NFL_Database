@@ -466,7 +466,6 @@ INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTo
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (56,2018,65,'891',4);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (82,2018,66,'872',4);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (35,2018,71,'868',4);
-INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (14,2018,107,'867',6);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (77,2018,74,'850',6);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (102,2018,65,'843',6);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (107,2018,59,'842',7);
