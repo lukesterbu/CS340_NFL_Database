@@ -394,7 +394,7 @@ INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,pa
 INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (282,2018,246,164,'2,366',17,12);
 INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (281,2018,393,217,'2,278',11,14);
 INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (134,2018,328,205,'2,180',10,5);
-INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (12,2018,320,169,'2,074',10,12);
+INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (278,2018,320,169,'2,074',10,12);
 INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (208,2018,274,176,'1,979',17,9);
 INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (280,2018,195,141,'1,413',7,4);
 INSERT INTO seasonStatistics(playerID,year,passingAttempts,passingCompletions,passingYards,passingTouchdowns,interceptions) VALUES (130,2018,170,99,'1,201',6,3);
