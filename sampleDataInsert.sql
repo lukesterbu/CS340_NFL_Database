@@ -360,7 +360,8 @@ INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Jo
 INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Baker','Mayfield','Quarterback',NULL,NULL,7);							
 INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Nick','Foles','Quarterback',NULL,NULL,19);							
 INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Josh','Rosen','Quarterback',NULL,NULL,29);							
-INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Ryan','Fitzpatrick','Quarterback',NULL,NULL,28);							
+INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Ryan','Fitzpatrick','Quarterback',NULL,NULL,28);
+INSERT INTO player(firstName,lastName,position,height,weight,teamID) VALUES ('Lamar','Jackson','Quarterback',NULL,NULL,5);							
 
 -- INSERT into seasonStatistics table - Passing stats
 
