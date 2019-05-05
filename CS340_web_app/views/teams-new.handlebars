@@ -1,0 +1,38 @@
+	<form method="post" class="form-signin">
+		<h2 class="form-signin-heading">Add new team</h2>
+		<label>Team Name</label>
+		<input type="text" name="teamName" class="form-control" required>
+
+		<label>City</label>
+		<input type="text" name="city" class="form-control" required>
+
+		<label>State</label>
+		<input type="text" name="state" class="form-control" required>
+
+		<label>Year Founded</label>
+		<input type="text" name="yearFounded" class="form-control">
+
+		<label>Majority Owner</label>
+		<input type="text" name="majOwner" class="form-control">
+		
+		<label>Conference</label>
+		<br>
+		<select name="conference">
+			<option value="NFC">NFC</option>
+			<option value="AFC">AFC</option>
+		</select>
+		<br>
+
+		<label>Division</label>
+		<br>
+		<select name="division">
+			<option value="East">East</option>
+			<option value="West">West</option>
+			<option value="Central">Central</option>
+		</select>
+
+		<br>
+		<br>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Submit</button>
+	</form>
