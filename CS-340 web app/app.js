@@ -18,9 +18,19 @@ app.get('/teams',function(req,res,next){
     res.render('teams', context);
 });
 
+app.get('/teams-new',function(req,res,next){
+  var context = {};
+    res.render('teams-new', context);
+});
+
 app.get('/players',function(req,res,next){
   var context = {};
     res.render('players', context);
+});
+
+app.get('/players-new',function(req,res,next){
+  var context = {};
+    res.render('players-new', context);
 });
 
 app.get('/coaches',function(req,res,next){
@@ -28,9 +38,19 @@ app.get('/coaches',function(req,res,next){
     res.render('coaches', context);
 });
 
+app.get('/coaches-new',function(req,res,next){
+  var context = {};
+    res.render('coaches-new', context);
+});
+
 app.get('/stats',function(req,res,next){
   var context = {};
     res.render('stats', context);
+});
+
+app.get('/stats-new',function(req,res,next){
+  var context = {};
+    res.render('stats-new', context);
 });
 
 app.get('/sponsors',function(req,res,next){
@@ -38,6 +58,10 @@ app.get('/sponsors',function(req,res,next){
     res.render('sponsors', context);
 });
 
+app.get('/sponsors-new',function(req,res,next){
+  var context = {};
+    res.render('sponsors-new', context);
+});
 
 
 // app.get('/insert',function(req,res,next){
