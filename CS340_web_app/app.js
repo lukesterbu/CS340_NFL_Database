@@ -23,7 +23,22 @@ app.get('/teams-new',function(req,res,next){
     res.render('teams-new', context);
 });
 
+app.post('/teams-new',function(req,res,next){
+  var context = {};
+    res.render('teams', context);
+});
+
 app.get('/players',function(req,res,next){
+  var context = {};
+    res.render('players', context);
+});
+
+app.post('/players-delete',function(req,res,next){
+  var context = {};
+    res.render('players', context);
+});
+
+app.post('/players-update',function(req,res,next){
   var context = {};
     res.render('players', context);
 });
@@ -31,6 +46,11 @@ app.get('/players',function(req,res,next){
 app.get('/players-new',function(req,res,next){
   var context = {};
     res.render('players-new', context);
+});
+
+app.post('/players-new',function(req,res,next){
+  var context = {};
+    res.render('players', context);
 });
 
 app.get('/coaches',function(req,res,next){
@@ -43,6 +63,11 @@ app.get('/coaches-new',function(req,res,next){
     res.render('coaches-new', context);
 });
 
+app.post('/coaches-new',function(req,res,next){
+  var context = {};
+    res.render('coaches', context);
+});
+
 app.get('/stats',function(req,res,next){
   var context = {};
     res.render('stats', context);
@@ -51,6 +76,11 @@ app.get('/stats',function(req,res,next){
 app.get('/stats-new',function(req,res,next){
   var context = {};
     res.render('stats-new', context);
+});
+
+app.post('/stats-new',function(req,res,next){
+  var context = {};
+    res.render('stats', context);
 });
 
 app.get('/sponsors',function(req,res,next){
@@ -63,6 +93,30 @@ app.get('/sponsors-new',function(req,res,next){
     res.render('sponsors-new', context);
 });
 
+app.post('/sponsors-new',function(req,res,next){
+  var context = {};
+    res.render('sponsors', context);
+});
+
+app.post('/sponsors-delete',function(req,res,next){
+  var context = {};
+    res.render('sponsors', context);
+});
+
+app.get('/sponsorships',function(req,res,next){
+  var context = {};
+    res.render('sponsorships', context);
+});
+
+app.get('/sponsorships-new',function(req,res,next){
+  var context = {};
+    res.render('sponsorships-new', context);
+});
+
+app.post('/sponsorships-new',function(req,res,next){
+  var context = {};
+    res.render('sponsorships', context);
+});
 
 // app.get('/insert',function(req,res,next){
 //   var context = {};
