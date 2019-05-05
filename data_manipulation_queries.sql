@@ -1,4 +1,3 @@
-START TRANSACTION; 
 -- get all teams   
 SELECT * 
 FROM   team; 
@@ -176,5 +175,3 @@ SET    firstname = :firstname,
        weight = :weight, 
        teamid = :teamid 
 WHERE  playerid = :playerID; 
-
-COMMIT; 
