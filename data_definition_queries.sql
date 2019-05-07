@@ -146,6 +146,17 @@ CREATE TABLE `sponsoredPlayers` (
 
 -- --------------------------------------------------------
 
+--
+-- Reset auto incrementing keys
+--
+
+DBCC CHECKIDENT (team, RESEED, 0);
+DBCC CHECKIDENT (coach, RESEED, 0);
+DBCC CHECKIDENT (corporateSponsor, RESEED, 0);
+DBCC CHECKIDENT (player, RESEED, 0);
+
+-- --------------------------------------------------------
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
