@@ -2,7 +2,12 @@
 -- Sample Data for NFL Database
 -- *****************************
 
+-- Reset IDs to start at 1
+
 ALTER TABLE team AUTO_INCREMENT = 1;
+ALTER TABLE coach AUTO_INCREMENT = 1;
+ALTER TABLE corporateSponsor AUTO_INCREMENT = 1;
+ALTER TABLE player AUTO_INCREMENT = 1;
 
 -- INSERT into team table
 
