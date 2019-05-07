@@ -76,6 +76,8 @@ INSERT INTO coach(firstName,lastName,title,teamID) VALUES ('Jay','Gruden','Head 
 
 INSERT INTO corporateSponsor(name,productType) VALUES ('Nike','Apparel');
 INSERT INTO corporateSponsor(name,productType) VALUES ('Gatorade','Sports Drink');
+INSERT INTO corporateSponsor(name,productType) VALUES ('Adidas','Apparel');
+INSERT INTO corporateSponsor(name,productType) VALUES ('Powerade','Sports Drink');
 
 -- INSERT into player
 
@@ -480,5 +482,13 @@ INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTo
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (99,2018,87,'751',7);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (232,2018,66,'750',13);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (93,2018,63,'739',3);
+
+-- INSERT into sponsoredPlayers
+
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (1, 1);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (2, 2);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (3, 3);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (4, 4);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (5, 3);
 
 -- END OF FILE
