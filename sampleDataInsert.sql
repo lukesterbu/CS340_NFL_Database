@@ -2,6 +2,8 @@
 -- Sample Data for NFL Database
 -- *****************************
 
+ALTER TABLE team AUTO_INCREMENT = 1;
+
 -- INSERT into team table
 
 INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Falcons','Atlanta','Georgia',1966,NULL,'National Football Conference','South');
