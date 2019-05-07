@@ -146,6 +146,10 @@ CREATE TABLE `sponsoredPlayers` (
 
 -- --------------------------------------------------------
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 -- *****************************
 -- Sample Data for NFL Database
 -- *****************************
@@ -640,7 +644,3 @@ INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (4, 4);
 INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (5, 3);
 
 -- END OF FILE
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
