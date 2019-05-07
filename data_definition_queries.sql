@@ -150,10 +150,7 @@ CREATE TABLE `sponsoredPlayers` (
 -- Reset auto incrementing keys
 --
 
-DBCC CHECKIDENT (team, RESEED, 0);
-DBCC CHECKIDENT (coach, RESEED, 0);
-DBCC CHECKIDENT (corporateSponsor, RESEED, 0);
-DBCC CHECKIDENT (player, RESEED, 0);
+ALTER TABLE team AUTO_INCREMENT = 1;
 
 -- --------------------------------------------------------
 
