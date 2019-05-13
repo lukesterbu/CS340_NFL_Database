@@ -5,36 +5,22 @@
     <div class="col-md-6">
 		<h4>first name</h4>
 		<div class="search-container">
-			<input type="text" placeholder="Search..">
-			<button type="button">Search</button>
+			<input id='fname' type="text" placeholder="Search..">
 		</div>
 		
-		<h4>last name name</h4>
+		<h4>last name</h4>
 		<div class="search-container">
-			<input type="text" placeholder="Search..">
-			<button type="button">Search</button>
+			<input  id='lname' type="text" placeholder="Search..">
 		</div>
     </div>
     <div class="col-md-6">
+		<br>
+		<button onClick='searchForPlayer()' type="button">Search</button>
+
 
 		<h3>Results</h3>
-		<table style="width:100%">
-		<tr>
-			<th>First name</th>
-			<th>Last name</th> 
-			<th>Team</th>
-		</tr>
-		<tr>
-			<td>Jim</td>
-			<td>Smith</td> 
-			<th><button type="button">Select this player</button></th>
-		</tr>
-		<tr>
-			<td>James</td>
-			<td>Jackson</td> 
-			<th><button type="button">Select this player</button></th>
-		</tr>
-		</table>
+		<div id='results-grid' style="width:100%"></div>
+
     </div>
   </div>
 </div>
@@ -46,14 +32,12 @@
 	<form method="post" class="form-signin">
 		<h2 class="form-signin-heading">Add sponsorship</h2>
 		<label>Player</label>
-		<input type="text" name="playerID" class="form-control" value="James Jackson" readonly>
+		<div id="playerSelectionDisplay">Search for a player give a sponsorship to</div>
+		<input type="hidden" id="playerSelection" type="text" name="playerID" class="form-control" value="" readonly>
 
 		<label>Sponsor</label>
 		<br>
-		<select name="sponsorID">
-			<option value="1">will populate from db later</option>
-			<option value="2">will populate from db later</option>
-			<option value="3">will populate from db later</option>
+		<select id="sponsorIDList" name="sponsorID">
 		</select>
 
 		<br>
@@ -61,3 +45,52 @@
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Submit</button>
 	</form>
+
+	<script>
+
+	// populate search by first and last name
+	function searchForPlayer() {
+		$.ajax({
+				url: '/players-search',
+				data: { 
+						"lastNameSearchTerm": $("#lname").val(), 
+						"firstNameSearchTerm": $("#fname").val(), 
+				},
+				type: "GET",
+				success: function(data) {
+					// remove all rows from previous search
+ 					$("body").find("tr").remove();
+
+					// get search results
+					for (var i=0; i<data.length; i++){
+							$("#results-grid").after(" \
+																						<tr> \
+																								<td>" + data[i].playerName + "</td> \
+																								<td>" + data[i].team + "</td> \
+																								<td><button onClick = 'selectPlayer (" + data[i].playerid + ", " + "\"" + data[i].playerName +"\"" + ")'>Select this player</button></td> \
+																						</tr>"
+																						);
+					}
+
+				}
+		});
+	}
+
+	function selectPlayer(playerid, name){
+		$("#playerSelectionDisplay").text(name)
+		$("#playerSelection").val(playerid)
+	}
+
+  $.get( '/sponsors-get', function( data ) {
+    for (var i=0; i<data.length; i++){
+       						$("#sponsorIDList").append("<option value='" + data[i].sponsorID + "'>" + data[i].name + "</option>");
+
+    }
+
+		console.log(data)
+
+  });
+
+
+
+</script>

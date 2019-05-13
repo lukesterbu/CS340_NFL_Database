@@ -49,12 +49,12 @@ FROM   seasonstatistics ss
 
 -- get all sponsored players   
 SELECT p.playerid, 
-       p.firstname + ' ' + lastname AS playerName, 
+       CONCAT (p.firstname, ' ', p.lastname) AS playerName, 
        cs.name                      AS sponsorName 
-FROM   sponsoredplayers sp 
+FROM   sponsoredPlayers sp 
        inner join player p 
                ON sp.playerid = p.playerid 
-       inner join corporatesponsor cs 
+       inner join corporateSponsor cs 
                ON sp.sponsorid = cs.sponsorid; 
 
 -- Query for Add new team  

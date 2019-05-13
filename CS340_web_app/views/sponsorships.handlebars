@@ -2,25 +2,30 @@
 <a href='sponsorships-new'>Add new sponsorship</a>
 <br>
 <br>
-<table style="width:100%" class="table table-striped">
-  <tr>
+<table  style="width:100%" class="table table-striped">
+  <tr id='sponsorship-grid'>
     <th>Player Name</th>
     <th>Sponsor</th>
     <th></th>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td><button>delete</button></td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td><button>delete</button></td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td><button>delete</button></td>
-  </tr>
 </table>
+<script>
+  $.get( '/sponsorships-get', function( data ) {
+    for (var i=0; i<data.length; i++){
+         $("#sponsorship-grid").after(" \
+                                      <tr> \
+                                          <td>" + data[i].playerName + "</td> \
+                                          <td>" + data[i].sponsorName + "</td> \
+                                          <td><button onClick = 'deleteRow (" + data[i].playerid + ")'>delete</button></td> \
+                                      </tr>"
+                                      );
+    }
+
+  });
+
+  function deleteRow (idToDelete){
+    console.log("deleting: " + idToDelete)
+  }
+
+
+</script>
