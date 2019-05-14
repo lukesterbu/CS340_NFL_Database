@@ -19,8 +19,9 @@
 
 
 		<h3>Results</h3>
-		<div id='results-grid' style="width:100%"></div>
-
+		<ul class="list-group">
+					<div id='results-grid' style="width:100%"></div>
+		</ul>
     </div>
   </div>
 </div>
@@ -59,16 +60,15 @@
 				type: "GET",
 				success: function(data) {
 					// remove all rows from previous search
- 					$("body").find("tr").remove();
+ 					$("body").find(".list-group-item").remove();
 
 					// get search results
 					for (var i=0; i<data.length; i++){
 							$("#results-grid").after(" \
-																						<tr> \
-																								<td>" + data[i].playerName + "</td> \
-																								<td>" + data[i].team + "</td> \
-																								<td><button onClick = 'selectPlayer (" + data[i].playerid + ", " + "\"" + data[i].playerName +"\"" + ")'>Select this player</button></td> \
-																						</tr>"
+																						 \
+																								<li class='list-group-item'>" + data[i].playerName + " - " + data[i].team + "   \
+																								<button onClick = 'selectPlayer (" + data[i].playerid + ", " + "\"" + data[i].playerName +"\"" + ")'>Select this player</button></li> \
+																						"
 																						);
 					}
 
