@@ -112,9 +112,90 @@ app.get('/stats',function(req,res,next){
     res.render('stats');
 });
 
+app.get('/stats-get',function(req,res,next){
+  
+  mysql.pool.query("\
+  SELECT p.playerid, \
+  CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
+  year, \
+  passingattempts, \
+  passingcompletions, \
+  passingyards,  \
+  passingtouchdowns, \
+  receptions, \
+  receivingyards, \
+  receivingtouchdowns, \
+  rushes, \
+  rushingyards, \
+  rushingtouchdowns, \
+  tackles, \
+  sacks, \
+  interceptions \
+  FROM   seasonStatistics ss \
+  inner join player p ON ss.playerid = p.playerid;  ", [], 
+    function(err, result){
+      if(err){
+        next(err);
+        return;
+      }
+      res.json(result);
+    });
+
+
+});
+
+
+
 app.get('/stats-new',function(req,res,next){
   
     res.render('stats-new');
+});
+
+
+
+
+app.post('/stats-new',function(req,res,next){
+  var query = mysql.pool.query(" \
+  INSERT INTO seasonStatistics \
+            (playerid, \
+             year,  \
+             passingattempts, \
+             passingcompletions, \
+             passingyards, \
+             passingtouchdowns, \
+             receptions, \
+             receivingyards, \
+             receivingtouchdowns, \
+             rushes, \
+             rushingyards, \
+             rushingtouchdowns, \
+             tackles, \
+             sacks, \
+             interceptions) \
+              VALUES      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?, ?, ?, ?); ", 
+              [req.body.playerID, 
+                req.body.year, 
+                req.body.passingattempts, 
+                req.body.passingcompletions, 
+                req.body.passingyards, 
+                req.body.passingtouchdowns, 
+                req.body.receptions, 
+                req.body.receivingyards, 
+                req.body.receivingtouchdowns, 
+                req.body.rushes, 
+                req.body.rushingyards, 
+                req.body.rushingtouchdowns, 
+                req.body.tackles, 
+                req.body.sacks, 
+                req.body.interceptions], 
+  function(err, result){
+
+    if(err){
+      next(err);
+      return;
+    }
+    res.render('stats');
+  });
 });
 
 app.post('/stats-new',function(req,res,next){
@@ -134,8 +215,8 @@ app.get('/sponsors-new',function(req,res,next){
 
 app.post('/sponsors-new',function(req,res,next){
   var query = mysql.pool.query(" \
-                  INSERT INTO corporateSponsor (name, productType) \
-                  VALUES      (?, ?);", [req.body.name, req.body.productType], function(err, result){
+                  INSERT INTO corporateSponsor (name, productType) VALUES      (?, ?);", 
+                  [req.body.name, req.body.productType], function(err, result){
 
     if(err){
       next(err);
