@@ -2,7 +2,7 @@
 <a href='stats-new'>Add new season statistic</a>
 <br>
 <br>
-<table style="width:100%" class="table table-striped">
+<table id = "statsList" style="width:100%" class="table table-striped">
   <tr>
     <th>Player Name</th>
     <th>Year</th>
@@ -20,55 +20,36 @@
     <th>Sacks</th>
     <th>Interceptions</th>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
 </table>
+
+<script>
+
+  $.get( '/stats-get', function( data ) {
+    for (var i=0; i<data.length; i++){
+       						$("#statsList").append(
+                     "<tr> \
+                        <td>" + (data[i].playerName || "") + "</td> \
+                        <td>" + (data[i].year  || "") + "</td> \
+                        <td>" + (data[i].passingattempts  || "") + "</td> \
+                        <td>" + (data[i].passingcompletions  || "") + "</td> \
+                        <td>" + (data[i].passingyards  || "")  + "</td> \
+                        <td>" + (data[i].passingtouchdowns  || "")  + "</td> \
+                        <td>" + (data[i].receptions  || "") + "</td> \
+                        <td>" + (data[i].receivingyards  || "") + "</td> \
+                        <td>" + (data[i].receivingtouchdowns   || "") + "</td> \
+                        <td>" + (data[i].rushes || "") + "</td> \
+                        <td>" + (data[i].rushingyards || "") + "</td> \
+                        <td>" + (data[i].rushingtouchdowns || "") + "</td> \
+                        <td>" + (data[i].tackles || "") + "</td> \
+                        <td>" + (data[i].sacks || "") + "</td> \
+                        <td>" + (data[i].interceptions || "") + "</td> \
+                      </tr>");
+
+    }
+
+
+  });
+
+
+
+</script>

@@ -58,38 +58,38 @@ app.post('/players-new',function(req,res,next){
 });
 
 app.get('/players-search',function(req,res,next){
-var lastNameSearchTerm = req.query.lastNameSearchTerm;
-var firstNameSearchTerm = req.query.firstNameSearchTerm;
+  var lastNameSearchTerm = req.query.lastNameSearchTerm;
+  var firstNameSearchTerm = req.query.firstNameSearchTerm;
 
-// only search by first or last name if they aren't blank, unless both are blank,
-// then search by both
-var isSearchByFirstName = false;
-var isSearchByLastName = false;
+  // only search by first or last name if they aren't blank, unless both are blank,
+  // then search by both
+  var isSearchByFirstName = false;
+  var isSearchByLastName = false;
 
-if(lastNameSearchTerm !== "")
-  isSearchByLastName = true;
-if(firstNameSearchTerm !== "")
-  isSearchByFirstName = true;
-if(!firstNameSearchTerm && !lastNameSearchTerm){
-  var isSearchByFirstName = true;
-  var isSearchByLastName = true;
-}
+  if(lastNameSearchTerm !== "")
+    isSearchByLastName = true;
+  if(firstNameSearchTerm !== "")
+    isSearchByFirstName = true;
+  if(!firstNameSearchTerm && !lastNameSearchTerm){
+    var isSearchByFirstName = true;
+    var isSearchByLastName = true;
+  }
 
-    var query = mysql.pool.query("SELECT playerid, \
-    CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
-    t.name AS team \
-    FROM   player p \
-    left join team t ON p.teamid = t.teamid \
-    WHERE ((" + mysql.pool.escape(isSearchByFirstName) + " = false) OR (" + mysql.pool.escape(isSearchByFirstName) + " = true AND firstName LIKE CONCAT ('%', " + mysql.pool.escape(firstNameSearchTerm) + ", '%'))) \
-          AND ((" + mysql.pool.escape(isSearchByLastName) + " = false) OR (" + mysql.pool.escape(isSearchByLastName) + " = true AND lastName LIKE CONCAT ('%', " + mysql.pool.escape(lastNameSearchTerm) + ", '%')));", [], 
-    function(err, result){
+  var query = mysql.pool.query("SELECT playerid, \
+  CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
+  t.name AS team \
+  FROM   player p \
+  left join team t ON p.teamid = t.teamid \
+  WHERE ((" + mysql.pool.escape(isSearchByFirstName) + " = false) OR (" + mysql.pool.escape(isSearchByFirstName) + " = true AND firstName LIKE CONCAT ('%', " + mysql.pool.escape(firstNameSearchTerm) + ", '%'))) \
+        AND ((" + mysql.pool.escape(isSearchByLastName) + " = false) OR (" + mysql.pool.escape(isSearchByLastName) + " = true AND lastName LIKE CONCAT ('%', " + mysql.pool.escape(lastNameSearchTerm) + ", '%')));", [], 
+  function(err, result){
 
-      if(err){
-        next(err);
-        return;
-      }
-      res.json(result);
-    });
+    if(err){
+      next(err);
+      return;
+    }
+    res.json(result);
+  });
 });
 
 app.get('/coaches',function(req,res,next){
@@ -112,9 +112,90 @@ app.get('/stats',function(req,res,next){
     res.render('stats');
 });
 
+app.get('/stats-get',function(req,res,next){
+  
+  mysql.pool.query("\
+  SELECT p.playerid, \
+  CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
+  year, \
+  passingattempts, \
+  passingcompletions, \
+  passingyards,  \
+  passingtouchdowns, \
+  receptions, \
+  receivingyards, \
+  receivingtouchdowns, \
+  rushes, \
+  rushingyards, \
+  rushingtouchdowns, \
+  tackles, \
+  sacks, \
+  interceptions \
+  FROM   seasonStatistics ss \
+  inner join player p ON ss.playerid = p.playerid;  ", [], 
+    function(err, result){
+      if(err){
+        next(err);
+        return;
+      }
+      res.json(result);
+    });
+
+
+});
+
+
+
 app.get('/stats-new',function(req,res,next){
   
     res.render('stats-new');
+});
+
+
+
+
+app.post('/stats-new',function(req,res,next){
+  var query = mysql.pool.query(" \
+  INSERT INTO seasonStatistics \
+            (playerid, \
+             year,  \
+             passingattempts, \
+             passingcompletions, \
+             passingyards, \
+             passingtouchdowns, \
+             receptions, \
+             receivingyards, \
+             receivingtouchdowns, \
+             rushes, \
+             rushingyards, \
+             rushingtouchdowns, \
+             tackles, \
+             sacks, \
+             interceptions) \
+              VALUES      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?, ?, ?, ?); ", 
+              [req.body.playerID, 
+                req.body.year, 
+                req.body.passingattempts, 
+                req.body.passingcompletions, 
+                req.body.passingyards, 
+                req.body.passingtouchdowns, 
+                req.body.receptions, 
+                req.body.receivingyards, 
+                req.body.receivingtouchdowns, 
+                req.body.rushes, 
+                req.body.rushingyards, 
+                req.body.rushingtouchdowns, 
+                req.body.tackles, 
+                req.body.sacks, 
+                req.body.interceptions], 
+  function(err, result){
+
+    if(err){
+      next(err);
+      return;
+    }
+    res.render('stats');
+  });
 });
 
 app.post('/stats-new',function(req,res,next){
@@ -133,8 +214,16 @@ app.get('/sponsors-new',function(req,res,next){
 });
 
 app.post('/sponsors-new',function(req,res,next){
-  
+  var query = mysql.pool.query(" \
+                  INSERT INTO corporateSponsor (name, productType) VALUES      (?, ?);", 
+                  [req.body.name, req.body.productType], function(err, result){
+
+    if(err){
+      next(err);
+      return;
+    }
     res.render('sponsors');
+  });
 });
 
 app.post('/sponsors-delete',function(req,res,next){

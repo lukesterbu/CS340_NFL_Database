@@ -3,20 +3,24 @@
 <br>
 <br>
 <table style="width:100%" class="table table-striped">
+  <tbody id='sponsorList'>
   <tr>
     <th>Name</th>
     <th>Product Type</th>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
+  </tbody>
 </table>
+<script>
+
+  $.get( '/sponsors-get', function( data ) {
+    for (var i=0; i<data.length; i++){
+       						$("#sponsorList").append("<tr><td>" + data[i].name + "</td><td>" + data[i].productType + "</td></tr>");
+
+    }
+
+
+  });
+
+
+
+</script>
