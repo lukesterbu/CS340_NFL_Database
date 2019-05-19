@@ -45,8 +45,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE `team` (
   `teamID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
   `year_founded` int(11) DEFAULT NULL,
   `majority_owner` varchar(255) DEFAULT NULL,
   `conference` varchar(255) NOT NULL,
@@ -157,38 +156,38 @@ CREATE TABLE `sponsoredPlayers` (
 
 -- INSERT into team table
 
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Falcons','Atlanta','Georgia',1966,NULL,'National Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Ravens','Baltimore','Maryland',1997,NULL,'American Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Bills','Buffalo','New York',1970,NULL,'American Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Bears','Chicago','Illinois',1922,NULL,'National Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Bengals','Cincinnati','Ohio',1970,NULL,'American Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Browns','Cleveland','Ohio',1950,NULL,'American Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Cowboys','Dallas','Texas',1960,NULL,'National Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Broncos','Denver','Colorado',1970,NULL,'American Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Lions','Detroit','Michigan',1930,NULL,'National Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Packers','Green Bay','Wisconsin',1921,NULL,'National Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Texans','Houston','Texas',2002,NULL,'American Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Colts','Indianapolis','Indiana',1953,NULL,'American Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Jaguars','Jacksonville','Florida',1995,NULL,'American Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Chiefs','Kansas City','Kansas',1970,NULL,'American Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Chargers','Los Angeles','California',1970,NULL,'American Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Rams','Los Angeles','California',1937,NULL,'National Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Dolphins','Miami','Florida',1970,NULL,'American Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Vikings','Minneapolis','Minnesota',1961,NULL,'National Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Patriots','New England','Massachusetts',1970,NULL,'American Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Saints','New Orleans','Louisiana',1967,NULL,'National Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Giants','New York','New York',1925,NULL,'National Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Jets','New York','New York',1970,NULL,'American Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Raiders','Oakland','California',1970,NULL,'American Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Eagles','Philadelphia','Pennsylvania',1933,NULL,'National Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Steelers','Pittsburgh','Pennsylvania',1933,NULL,'American Football Conference','North');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('49ers','San Francisco','California',1950,NULL,'National Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Seahawks','Seattle','Washington',1976,NULL,'National Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Buccaneers','Tampa Bay','Florida',1976,NULL,'National Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Redskins','Washington','Maryland',1932,NULL,'National Football Conference','East');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Cardinals','Glendale','Arizona',1920,NULL,'National Football Conference','West');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Panthers','Charlotte','North Carolina',1995,NULL,'National Football Conference','South');
-INSERT INTO team(name,city,state,year_founded,majority_owner,conference,division) VALUES ('Titans','Nashville','Tennessee',1970,NULL,'American Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Bills','Buffalo',1970,NULL,'American Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Dolphins','Miami',1970,NULL,'American Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Patriots','New England',1970,NULL,'American Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Jets','New York',1970,NULL,'American Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Ravens','Baltimore',1997,NULL,'American Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Bengals','Cincinnati',1970,NULL,'American Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Browns','Cleveland',1950,NULL,'American Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Steelers','Pittsburgh',1933,NULL,'American Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Texans','Houston',2002,NULL,'American Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Colts','Indianapolis',1953,NULL,'American Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Jaguars','Jacksonville',1995,NULL,'American Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Titans','Tennessee',1970,NULL,'American Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Broncos','Denver',1970,NULL,'American Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Chiefs','Kansas City',1970,NULL,'American Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Chargers','Los Angeles',1970,NULL,'American Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Raiders','Oakland',1970,NULL,'American Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Cowboys','Dallas',1960,NULL,'National Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Giants','New York',1925,NULL,'National Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Eagles','Philadelphia',1933,NULL,'National Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Redskins','Washington',1932,NULL,'National Football Conference','East');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Bears','Chicago',1922,NULL,'National Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Lions','Detroit',1930,NULL,'National Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Packers','Green Bay',1921,NULL,'National Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Vikings','Minnesota',1961,NULL,'National Football Conference','North');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Falcons','Atlanta',1966,NULL,'National Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Panthers','Carolina',1995,NULL,'National Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Saints','New Orleans',1967,NULL,'National Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Buccaneers','Tampa Bay',1976,NULL,'National Football Conference','South');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Cardinals','Arizona',1920,NULL,'National Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Rams','Los Angeles',1937,NULL,'National Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('49ers','San Francisco',1950,NULL,'National Football Conference','West');
+INSERT INTO team(name,location,year_founded,majority_owner,conference,division) VALUES ('Seahawks','Seattle',1976,NULL,'National Football Conference','West');
 
 -- INSERT into coach table
 
