@@ -44,9 +44,9 @@ app.get('/players',function(req,res,next) {
       return;
     }
     context.results = rows;
-    res.render('players');
-  }
-});
+    res.render('players', context);
+  });
+};
 
 app.post('/players-delete',function(req,res,next){
   
