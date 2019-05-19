@@ -32,16 +32,18 @@ app.post('/teams-new',function(req,res,next){
     res.render('teams');
 });
 
-app.get('/players',function(req,res,next){
-  mysql.pool.query("SELECT p.firstName + p.lastName AS Name, p.position, p.height, p.weight, t.name + "
+app.get('/players',function(req,res,next) {
+  var context = {};
+  mysql.pool.query("SELECT CONCAT (p.firstName, ' ', p.lastName) AS Name, p.position, p.height, p.weight, t.name "
   "FROM player p "
   "INNER JOIN team t "
-  "WHERE t.teamID = p.teamID);",
+  "WHERE t.teamID = p.teamID;",
   function(err, rows, fields) {
     if(err) {
       next(err);
       return;
     }
+    context.results = rows;
     res.render('players');
   }
 });
