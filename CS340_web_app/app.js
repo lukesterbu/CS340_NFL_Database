@@ -34,10 +34,10 @@ app.post('/teams-new',function(req,res,next){
 
 app.get('/players',function(req,res,next) {
   var context = {};
-  mysql.pool.query("SELECT CONCAT (p.firstName, ' ', p.lastName) AS Name, p.position, p.height, p.weight, t.name \
+  mysql.pool.query("SELECT CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, (t.name) AS teamName \
   FROM player p \
-  INNER JOIN team t \
-  WHERE t.teamID = p.teamID;",
+  LEFT JOIN team t \
+  ON p.teamID = t.teamID;",
   function(err, rows, fields) {
     if(err) {
       next(err);
