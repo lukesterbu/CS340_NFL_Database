@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 	<form method="post" class="form-signin">
 		<h2 class="form-signin-heading">Add new player</h2>
 		<label>First Name</label>
@@ -19,9 +20,9 @@
 		<br>
 		<select name="team">
 			<option value="-1">Free Agent</option>
-			<option value="1">will populate from db later</option>
-			<option value="2">will populate from db later</option>
-			<option value="3">will populate from db later</option>
+			{{#each results}}
+			<option value={{this.teamID}}>{{this.teamName}}</option>
+			{{/each}}
 		</select>
 
 		<br>

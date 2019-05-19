@@ -68,8 +68,17 @@ app.post('/players-update',function(req,res,next){
 });
 
 app.get('/players-new',function(req,res,next){
-  
-    res.render('players-new');
+  var context = {};
+  mysql.pool.query("SELECT teamID, CONCAT(location, ' ', name) AS teamName \
+  FROM team;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('players-new', context);
+  });
 });
 
 app.post('/players-new',function(req,res,next){
@@ -129,12 +138,20 @@ app.get('/coaches',function(req,res,next){
 });
 
 app.get('/coaches-new',function(req,res,next){
-  
-    res.render('coaches-new');
+  var context = {};
+  mysql.pool.query("SELECT teamID, CONCAT(location, ' ', name) AS teamName \
+  FROM team;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('coaches-new', context);
+  });
 });
 
-app.post('/coaches-new',function(req,res,next){
-  
+app.post('/coaches',function(req,res,next){
     res.render('coaches');
 });
 

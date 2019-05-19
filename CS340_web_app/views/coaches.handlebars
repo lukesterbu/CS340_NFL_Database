@@ -8,12 +8,14 @@
     <th>Name</th>
     <th>Title</th>
     <th>Team</th>
+    <th></th>
   </tr>
   {{#each results}}
   <tr id={{this.id}}>
     <td>{{this.name}}</td>
     <td>{{this.title}}</td>
     <td>{{this.teamName}}</td>
+    <td><button>Delete</button><button>Update</button></td>
   </tr>
   {{/each}}
 </table>
