@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <h1>Teams</h1>
 <a href='teams-new'>Add new team</a>
 <br>
@@ -5,38 +6,23 @@
 <table style="width:100%" class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>City</th>
-    <th>State</th>
+    <th>Location</th>
     <th>Year Founded</th>
     <th>Majority Owner</th>
     <th>Conference</th>
     <th>Division</th>
+    <th></th>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
+  {{each results}}
+  <tr id={{this.id}}>
+    <td>{{this.name}}</td>
+    <td>{{this.location}}</td>
+    <td>{{this.year_founded}}</td>
+    <td>{{this.majority_owner}}</td>
+    <td>{{this.conference}}</td>
+    <td>{{this.division}}</td>
+    <td><button>Delete</button><button>Update</button></td>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
+  {{each}}
 </table>
+<script></script>

@@ -45,8 +45,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE `team` (
   `teamID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
   `year_founded` int(11) DEFAULT NULL,
   `majority_owner` varchar(255) DEFAULT NULL,
   `conference` varchar(255) NOT NULL,

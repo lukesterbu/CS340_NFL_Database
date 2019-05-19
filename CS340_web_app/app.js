@@ -18,8 +18,17 @@ app.get('/',function(req,res,next){
 });
 
 app.get('/teams',function(req,res,next){
-  
+  var context = {};
+  mysql.pool.query("SELECT name, location, year_founded, majority_owner, conference, division \
+  FROM team;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
     res.render('teams');
+  });
 });
 
 app.get('/teams-new',function(req,res,next){
