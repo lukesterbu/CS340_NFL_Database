@@ -33,8 +33,17 @@ app.post('/teams-new',function(req,res,next){
 });
 
 app.get('/players',function(req,res,next){
-  
+  mysql.pool.query("SELECT p.firstName + p.lastName AS Name, p.position, p.height, p.weight, t.name + "
+  "FROM player p "
+  "INNER JOIN team t "
+  "WHERE t.teamID = p.teamID);",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
     res.render('players');
+  }
 });
 
 app.post('/players-delete',function(req,res,next){
