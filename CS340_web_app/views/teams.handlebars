@@ -13,7 +13,7 @@
     <th>Division</th>
     <th></th>
   </tr>
-  {{each results}}
+  {{#each results}}
   <tr id={{this.id}}>
     <td>{{this.name}}</td>
     <td>{{this.location}}</td>
@@ -23,6 +23,6 @@
     <td>{{this.division}}</td>
     <td><button>Delete</button><button>Update</button></td>
   </tr>
-  {{each}}
+  {{/each}}
 </table>
 <script></script>

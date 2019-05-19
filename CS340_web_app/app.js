@@ -27,7 +27,7 @@ app.get('/teams',function(req,res,next){
       return;
     }
     context.results = rows;
-    res.render('teams');
+    res.render('teams', context);
   });
 });
 
@@ -113,8 +113,19 @@ app.get('/players-search',function(req,res,next){
 });
 
 app.get('/coaches',function(req,res,next){
-  
-    res.render('coaches');
+  var context = {};
+  mysql.pool.query("SELECT CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.name, ' ', t.location) AS teamName \
+  FROM coach c \
+  LEFT JOIN team t \
+  ON c.teamID = t.teamID;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('coaches', context);
+  });
 });
 
 app.get('/coaches-new',function(req,res,next){
