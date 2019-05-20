@@ -42,7 +42,7 @@ app.post('/teams-new',function(req,res,next){
       return;
     }
     var context = {};
-    mysql.pool.query("SELECT teamID, location, name, year_founded, majority_owner, conference, division \
+    mysql.pool.query("SELECT * \
     FROM team;",
     function(err, rows, fields) {
       if(err) {
