@@ -1,8 +1,6 @@
 var express = require('express');
 var mysql = require('./dbcon.js');
 
-
-
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
@@ -98,8 +96,27 @@ app.get('/players-new',function(req,res,next){
 });
 
 app.post('/players-new',function(req,res,next){
-  
-    res.render('players');
+  mysql.pool.query("INSERT INTO player (firstName, lastName, position, height, weight, teamID) \
+  VALUES (?, ?, ?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.position, req.body.height, req.body.weight, req.body.team],
+  function(err, results) {
+    if(err) {
+      next(err);
+      return;
+    }
+    var context = {};
+    mysql.pool.query("SELECT CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
+    FROM player p \
+    LEFT JOIN team t \
+    ON p.teamID = t.teamID;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.results = rows;
+      res.render('players', context);
+    });
+  });
 });
 
 app.get('/players-search',function(req,res,next){
