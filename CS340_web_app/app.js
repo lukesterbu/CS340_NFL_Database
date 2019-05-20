@@ -96,6 +96,9 @@ app.get('/players-new',function(req,res,next){
 });
 
 app.post('/players-new',function(req,res,next){
+  if (req.body.team === "-1") {
+    req.body.team = null;
+  }
   mysql.pool.query("INSERT INTO player (firstName, lastName, position, height, weight, teamID) \
   VALUES (?, ?, ?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.position, req.body.height, req.body.weight, req.body.team],
   function(err, results) {
@@ -185,6 +188,9 @@ app.get('/coaches-new',function(req,res,next){
 });
 
 app.post('/coaches-new',function(req,res,next){
+  if (req.body.team === "-1") {
+    req.body.team = null;
+  }
   mysql.pool.query("INSERT INTO coach (firstName, lastName, title, teamID) \
   VALUES (?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.title, req.body.team],
   function(err, results) {
