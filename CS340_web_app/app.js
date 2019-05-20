@@ -1,8 +1,6 @@
 var express = require('express');
 var mysql = require('./dbcon.js');
 
-
-
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
@@ -18,23 +16,59 @@ app.get('/',function(req,res,next){
 });
 
 app.get('/teams',function(req,res,next){
-  
-    res.render('teams');
+  var context = {};
+  mysql.pool.query("SELECT teamID, location, name, year_founded, majority_owner, conference, division \
+  FROM team;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('teams', context);
+  });
 });
 
 app.get('/teams-new',function(req,res,next){
-  
-    res.render('teams-new');
+  res.render('teams-new');
 });
 
 app.post('/teams-new',function(req,res,next){
-  
-    res.render('teams');
+  mysql.pool.query("INSERT INTO team (name, location, year_founded, majority_owner, conference, division) \
+  VALUES (?, ?, ?, ?, ?, ?)", [req.body.teamName, req.body.location, req.body.year_founded, req.body.majority_owner, req.body.conference, req.body.division],
+  function(err, results) {
+    if(err) {
+      next(err);
+      return;
+    }
+    var context = {};
+    mysql.pool.query("SELECT teamID, location, name, year_founded, majority_owner, conference, division \
+    FROM team;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.results = rows;
+      res.render('teams', context);
+    });
+  });
 });
 
-app.get('/players',function(req,res,next){
-  
-    res.render('players');
+app.get('/players',function(req,res,next) {
+  var context = {};
+  mysql.pool.query("SELECT p.playerID, CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
+  FROM player p \
+  LEFT JOIN team t \
+  ON p.teamID = t.teamID;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('players', context);
+  });
 });
 
 app.post('/players-delete',function(req,res,next){
@@ -48,13 +82,44 @@ app.post('/players-update',function(req,res,next){
 });
 
 app.get('/players-new',function(req,res,next){
-  
-    res.render('players-new');
+  var context = {};
+  mysql.pool.query("SELECT teamID, CONCAT(location, ' ', name) AS teamName \
+  FROM team;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('players-new', context);
+  });
 });
 
 app.post('/players-new',function(req,res,next){
-  
-    res.render('players');
+  if (req.body.team === "-1") {
+    req.body.team = null;
+  }
+  mysql.pool.query("INSERT INTO player (firstName, lastName, position, height, weight, teamID) \
+  VALUES (?, ?, ?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.position, req.body.height, req.body.weight, req.body.team],
+  function(err, results) {
+    if(err) {
+      next(err);
+      return;
+    }
+    var context = {};
+    mysql.pool.query("SELECT p.playerID, CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
+    FROM player p \
+    LEFT JOIN team t \
+    ON p.teamID = t.teamID;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.results = rows;
+      res.render('players', context);
+    });
+  });
 });
 
 app.get('/players-search',function(req,res,next){
@@ -93,18 +158,60 @@ app.get('/players-search',function(req,res,next){
 });
 
 app.get('/coaches',function(req,res,next){
-  
-    res.render('coaches');
+  var context = {};
+  mysql.pool.query("SELECT c.coachID, CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
+  FROM coach c \
+  LEFT JOIN team t \
+  ON c.teamID = t.teamID;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('coaches', context);
+  });
 });
 
 app.get('/coaches-new',function(req,res,next){
-  
-    res.render('coaches-new');
+  var context = {};
+  mysql.pool.query("SELECT teamID, CONCAT(location, ' ', name) AS teamName \
+  FROM team;",
+  function(err, rows, fields) {
+    if(err) {
+      next(err);
+      return;
+    }
+    context.results = rows;
+    res.render('coaches-new', context);
+  });
 });
 
 app.post('/coaches-new',function(req,res,next){
-  
-    res.render('coaches');
+  if (req.body.team === "-1") {
+    req.body.team = null;
+  }
+  mysql.pool.query("INSERT INTO coach (firstName, lastName, title, teamID) \
+  VALUES (?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.title, req.body.team],
+  function(err, results) {
+    if(err) {
+      next(err);
+      return;
+    }
+    var context = {};
+    mysql.pool.query("SELECT c.coachID, CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
+    FROM coach c \
+    LEFT JOIN team t \
+    ON c.teamID = t.teamID;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.results = rows;
+      res.render('coaches', context);
+    });
+  });
 });
 
 app.get('/stats',function(req,res,next){

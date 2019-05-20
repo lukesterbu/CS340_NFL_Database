@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <h1>Coaches</h1>
 <a href='coaches-new'>Add new coach</a>
 <br>
@@ -7,20 +8,15 @@
     <th>Name</th>
     <th>Title</th>
     <th>Team</th>
+    <th></th>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
+  {{#each results}}
+  <tr id={{this.coachID}}>
+    <td>{{this.name}}</td>
+    <td>{{this.title}}</td>
+    <td>{{this.teamName}}</td>
+    <td><button>Delete</button><button>Update</button></td>
   </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
-  <tr>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-    <td>Will populate from DB later</td>
-  </tr>
+  {{/each}}
 </table>
+<script></script>
