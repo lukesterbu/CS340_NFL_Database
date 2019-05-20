@@ -17,7 +17,7 @@ app.get('/',function(req,res,next){
 
 app.get('/teams',function(req,res,next){
   var context = {};
-  mysql.pool.query("SELECT location, name, year_founded, majority_owner, conference, division \
+  mysql.pool.query("SELECT teamID, location, name, year_founded, majority_owner, conference, division \
   FROM team;",
   function(err, rows, fields) {
     if(err) {
@@ -42,7 +42,7 @@ app.post('/teams-new',function(req,res,next){
       return;
     }
     var context = {};
-    mysql.pool.query("SELECT location, name, year_founded, majority_owner, conference, division \
+    mysql.pool.query("SELECT teamID, location, name, year_founded, majority_owner, conference, division \
     FROM team;",
     function(err, rows, fields) {
       if(err) {
@@ -57,7 +57,7 @@ app.post('/teams-new',function(req,res,next){
 
 app.get('/players',function(req,res,next) {
   var context = {};
-  mysql.pool.query("SELECT CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
+  mysql.pool.query("SELECT p.playerID, CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
   FROM player p \
   LEFT JOIN team t \
   ON p.teamID = t.teamID;",
@@ -107,7 +107,7 @@ app.post('/players-new',function(req,res,next){
       return;
     }
     var context = {};
-    mysql.pool.query("SELECT CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
+    mysql.pool.query("SELECT p.playerID, CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
     FROM player p \
     LEFT JOIN team t \
     ON p.teamID = t.teamID;",
@@ -159,7 +159,7 @@ app.get('/players-search',function(req,res,next){
 
 app.get('/coaches',function(req,res,next){
   var context = {};
-  mysql.pool.query("SELECT CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
+  mysql.pool.query("SELECT c.coachID, CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
   FROM coach c \
   LEFT JOIN team t \
   ON c.teamID = t.teamID;",
@@ -199,7 +199,7 @@ app.post('/coaches-new',function(req,res,next){
       return;
     }
     var context = {};
-    mysql.pool.query("SELECT CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
+    mysql.pool.query("SELECT c.coachID, CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
     FROM coach c \
     LEFT JOIN team t \
     ON c.teamID = t.teamID;",
