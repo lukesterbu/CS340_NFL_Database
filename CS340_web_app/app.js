@@ -138,21 +138,19 @@ app.get('/coaches',function(req,res,next){
 });
 
 app.get('/coaches-new',function(req,res,next){
-  var context = {};
-  mysql.pool.query("SELECT teamID, CONCAT(location, ' ', name) AS teamName \
-  FROM team;",
-  function(err, rows, fields) {
+  res.render('coaches-new');
+});
+
+app.post('/coaches-new',function(req,res,next){
+  mysql.pool.query("INSERT INTO coach (firstName, lastName, title, teamID) \
+  VALUES (?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.title, req.body.team],
+  function(err, results) {
     if(err) {
       next(err);
       return;
     }
-    context.results = rows;
-    res.render('coaches-new', context);
-  });
-});
-
-app.post('/coaches',function(req,res,next){
     res.render('coaches');
+  });
 });
 
 app.get('/stats',function(req,res,next){
