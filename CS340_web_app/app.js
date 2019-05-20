@@ -17,7 +17,7 @@ app.get('/',function(req,res,next){
 
 app.get('/teams',function(req,res,next){
   var context = {};
-  mysql.pool.query("SELECT teamID, location, name, year_founded, majority_owner, conference, division \
+  mysql.pool.query("SELECT * \
   FROM team;",
   function(err, rows, fields) {
     if(err) {
