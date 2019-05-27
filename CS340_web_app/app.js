@@ -28,6 +28,16 @@ app.post('/teams', function(req, res, next) {
       }
     });
   }
+  else if(req.body.type === "edit") {
+    mysql.pool.query("UPDATE team SET " + [req.body.attribute] + "=? WHERE teamID=?", 
+    [req.body.data, req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
 });
 
 app.get('/teams', function(req, res, next) {

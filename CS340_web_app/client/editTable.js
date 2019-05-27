@@ -13,3 +13,18 @@ function deleteRow() {
 	req.setRequestHeader("Content-type", "application/json");
 	req.send(JSON.stringify(payload));
 }
+
+function editRow() {
+	var payload = {};
+	var tr = event.target.parentNode;
+	payload.data = event.target.textContent;
+	console.log(event.target.id);
+	payload.attribute = event.target.id;
+	payload.type = "edit";
+	payload.rowId = tr.id;
+	// AJAX request
+	var req = new XMLHttpRequest();
+	req.open("POST", "/teams", true);
+	req.setRequestHeader("Content-type", "application/json");
+	req.send(JSON.stringify(payload));
+}
