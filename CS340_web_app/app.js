@@ -325,25 +325,6 @@ app.post('/stats-update/:id/:year',function(req,res,next){
                 req.body.year, ], 
   function(err, result){
 
-    console.log(              
-      req.body.passingattempts, 
-      req.body.passingcompletions, 
-      req.body.passingyards, 
-      req.body.passingtouchdowns, 
-      req.body.receptions, 
-      req.body.receivingyards, 
-      req.body.receivingtouchdowns, 
-      req.body.rushes, 
-      req.body.rushingyards, 
-      req.body.rushingtouchdowns, 
-      req.body.tackles, 
-      req.body.sacks, 
-      req.body.interceptions,
-      req.body.playerID, 
-      req.body.year);
-
-    console.log(query.sql)
-
     if(err){
       next(err);
       return;
@@ -422,6 +403,27 @@ app.get('/sponsors-new',function(req,res,next){
     res.render('sponsors-new');
 });
 
+app.get('/sponsors-update/:id',function(req,res,next){
+  
+  res.render('sponsors-update', {id: req.params.id});
+});
+
+app.post('/sponsors-update/:id',function(req,res,next){
+  var query = mysql.pool.query(" \
+                                UPDATE corporateSponsor \
+                                SET name = ?, \
+                                    producttype = ? \
+                              WHERE sponsorID = ?;", 
+                              [req.body.name, req.body.productType, req.params.id], function(err, result){
+
+  if(err){
+    next(err);
+    return;
+  }
+  res.render('sponsors');
+});
+});
+
 app.post('/sponsors-new',function(req,res,next){
   var query = mysql.pool.query(" \
                   INSERT INTO corporateSponsor (name, productType) VALUES      (?, ?);", 
@@ -443,6 +445,20 @@ app.post('/sponsors-delete',function(req,res,next){
 app.get('/sponsors-get',function(req,res,next){
   mysql.pool.query("SELECT * FROM   corporateSponsor; ", [], 
     function(err, result){
+      if(err){
+        next(err);
+        return;
+      }
+      res.json(result);
+    });
+});
+
+app.get('/sponsors-get/:id',function(req,res,next){
+  var query = mysql.pool.query("SELECT * FROM   corporateSponsor  where sponsorid = " + req.params.id + ";", [], 
+    function(err, result){
+
+      console.log(query)
+
       if(err){
         next(err);
         return;

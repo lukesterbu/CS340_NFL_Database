@@ -1,0 +1,25 @@
+	<form method="post" class="form-signin">
+		<h2 class="form-signin-heading">Update sponsor</h2>
+		<label>Name</label>
+		<input id='name' type="text" name="name" class="form-control" required>
+
+		<label>Product type</label>
+		<input id = 'type' type="text" name="productType" class="form-control" required>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Submit</button>
+	</form>
+
+	
+<script>
+
+	$.get( "../../sponsors-get/" + 	{{id}} , function( data ) {
+
+		$("#name").val(data[0].name);
+		$("#type").val(data[0].productType);
+
+
+
+	});
+
+
+</script>
