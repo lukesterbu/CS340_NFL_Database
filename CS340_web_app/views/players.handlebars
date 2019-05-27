@@ -15,14 +15,14 @@
   </tr>
   {{#each results}}
   <tr id={{this.playerID}}>
-    <td id="firstName" contenteditable="true" onblur="editRow()">{{this.firstName}}</td>
-    <td id="lastName" contenteditable="true" onblur="editRow()">{{this.lastName}}</td>
-    <td id="position" contenteditable="true" onblur="editRow()">{{this.position}}</td>
-    <td id="height" contenteditable="true" onblur="editRow()">{{this.height}}</td>
-    <td id="weight" contenteditable="true" onblur="editRow()">{{this.weight}}</td>
+    <td id="firstName" contenteditable="true" onblur="editPlayerRow()">{{this.firstName}}</td>
+    <td id="lastName" contenteditable="true" onblur="editPlayerRow()">{{this.lastName}}</td>
+    <td id="position" contenteditable="true" onblur="editPlayerRow()">{{this.position}}</td>
+    <td id="height" contenteditable="true" onblur="editPlayerRow()">{{this.height}}</td>
+    <td id="weight" contenteditable="true" onblur="editPlayerRow()">{{this.weight}}</td>
     <td id={{this.teamID}}>{{this.teamName}}</td>
     <td>
-      <button>Delete</button>
+      <input type="button" value="Delete" onclick="deletePlayerRow()">
     </td>
   </tr>
   {{/each}}
