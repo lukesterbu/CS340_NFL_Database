@@ -21,7 +21,10 @@
     <td>{{this.majority_owner}}</td>
     <td>{{this.conference}}</td>
     <td>{{this.division}}</td>
-    <td><button>Delete</button><button>Update</button></td>
+    <td>
+      <button onclick="deleteRow()">Delete</button>
+      <button>Update</button>
+    </td>
   </tr>
   {{/each}}
 </table>
