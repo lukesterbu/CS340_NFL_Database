@@ -4,6 +4,7 @@
 <br>
 <table id = "statsList" style="width:100%" class="table table-striped">
   <tr>
+    <th></th>
     <th>Player Name</th>
     <th>Year</th>
     <th>Passing Attempts</th>
@@ -24,10 +25,14 @@
 
 <script>
 
+  window.history.pushState("", "", '/stats');
+
+
   $.get( '/stats-get', function( data ) {
     for (var i=0; i<data.length; i++){
        						$("#statsList").append(
                      "<tr> \
+                        <td><button onClick=goToEditPage(" + data[i].playerid + "," +  data[i].year + ")>Update</button></td> \
                         <td>" + (data[i].playerName || "") + "</td> \
                         <td>" + (data[i].year  || "") + "</td> \
                         <td>" + (data[i].passingattempts  || "") + "</td> \
@@ -49,6 +54,12 @@
 
 
   });
+
+  function goToEditPage(id, y){
+
+    window.location.replace('../stats-update/' + id + "/" + y);
+
+  }
 
 
 

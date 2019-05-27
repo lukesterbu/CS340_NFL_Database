@@ -219,6 +219,11 @@ app.get('/stats',function(req,res,next){
     res.render('stats');
 });
 
+app.get('/stats-update/:id/:year',function(req,res,next){
+  
+  res.render('stats-update', {id: req.params.id, year: req.params.year});
+});
+
 app.get('/stats-get',function(req,res,next){
   
   mysql.pool.query("\
@@ -251,6 +256,103 @@ app.get('/stats-get',function(req,res,next){
 
 });
 
+app.get('/stats-get/:id/:year',function(req,res,next){
+  
+  mysql.pool.query("\
+  SELECT p.playerid, \
+  CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
+  year, \
+  passingattempts, \
+  passingcompletions, \
+  passingyards,  \
+  passingtouchdowns, \
+  receptions, \
+  receivingyards, \
+  receivingtouchdowns, \
+  rushes, \
+  rushingyards, \
+  rushingtouchdowns, \
+  tackles, \
+  sacks, \
+  interceptions \
+  FROM   seasonStatistics ss \
+  inner join player p ON ss.playerid = p.playerid \
+  where p.playerID = " + req.params.id + " AND year = " + req.params.year + ";  ", [], 
+    function(err, result){
+      if(err){
+        next(err);
+        return;
+      }
+      res.json(result);
+    });
+
+
+});
+
+
+app.post('/stats-update/:id/:year',function(req,res,next){
+  var query = mysql.pool.query(" \
+  UPDATE seasonStatistics \
+    SET         passingattempts = ?, \
+                passingcompletions = ?, \
+                passingyards = ?, \
+                passingtouchdowns = ?, \
+                receptions = ?, \
+                receivingyards = ?, \
+                receivingtouchdowns = ?, \
+                rushes = ?, \
+                rushingyards = ?, \
+                rushingtouchdowns = ?, \
+                tackles = ?, \
+                sacks = ?, \
+                interceptions = ?  \
+    WHERE  playerid = ? AND year = ?; ", 
+              [
+                req.body.passingAttempts, 
+                req.body.passingCompletions, 
+                req.body.passingYards, 
+                req.body.passingTouchdowns, 
+                req.body.receptions, 
+                req.body.receivingYards, 
+                req.body.receivingTouchdowns, 
+                req.body.rushes, 
+                req.body.rushingYards, 
+                req.body.rushingTouchdowns, 
+                req.body.tackles, 
+                req.body.sacks, 
+                req.body.interceptions,
+                req.body.playerID, 
+                req.body.year, ], 
+  function(err, result){
+
+    console.log(              
+      req.body.passingattempts, 
+      req.body.passingcompletions, 
+      req.body.passingyards, 
+      req.body.passingtouchdowns, 
+      req.body.receptions, 
+      req.body.receivingyards, 
+      req.body.receivingtouchdowns, 
+      req.body.rushes, 
+      req.body.rushingyards, 
+      req.body.rushingtouchdowns, 
+      req.body.tackles, 
+      req.body.sacks, 
+      req.body.interceptions,
+      req.body.playerID, 
+      req.body.year);
+
+    console.log(query.sql)
+
+    if(err){
+      next(err);
+      return;
+    }
+    res.render('stats');
+  });
+});
+
+
 
 
 app.get('/stats-new',function(req,res,next){
@@ -282,16 +384,16 @@ app.post('/stats-new',function(req,res,next){
               VALUES      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?, ?, ?, ?); ", 
               [req.body.playerID, 
                 req.body.year, 
-                req.body.passingattempts, 
-                req.body.passingcompletions, 
-                req.body.passingyards, 
-                req.body.passingtouchdowns, 
+                req.body.passingAttempts, 
+                req.body.passingCompletions, 
+                req.body.passingYards, 
+                req.body.passingTouchdowns, 
                 req.body.receptions, 
-                req.body.receivingyards, 
-                req.body.receivingtouchdowns, 
+                req.body.receivingYards, 
+                req.body.receivingTouchdowns, 
                 req.body.rushes, 
-                req.body.rushingyards, 
-                req.body.rushingtouchdowns, 
+                req.body.rushingYards, 
+                req.body.rushingTouchdowns, 
                 req.body.tackles, 
                 req.body.sacks, 
                 req.body.interceptions], 
