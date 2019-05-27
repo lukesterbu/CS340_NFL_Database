@@ -9,7 +9,7 @@ function deleteRow() {
 	tr.parentNode.removeChild(tr);
 	// AJAX request
 	var req = new XMLHttpRequest();
-	req.open("GET", "/teams", true);
+	req.open("POST", "/teams", true);
 	req.setRequestHeader("Content-type", "application/json");
 	req.send(JSON.stringify(payload));
 }

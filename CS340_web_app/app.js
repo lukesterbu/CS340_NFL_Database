@@ -7,6 +7,9 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('client'));
+app.use(bodyParser.json());
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
@@ -15,11 +18,9 @@ app.get('/',function(req,res,next){
     res.render('home');
 });
 
-app.get('/teams',function(req,res,next){
-  var context = {};
-  // Handles Delete request
+app.post('/teams', function(req, res, next) {
   if(req.body.type === "delete") {
-    msql.pool.query("DELETE FROM team WHERE id=?", [req.boy.rowId],
+    mysql.pool.query("DELETE FROM team WHERE teamID=?", [req.body.rowId],
     function(err, result) {
       if(err) {
         next(err);
@@ -27,6 +28,10 @@ app.get('/teams',function(req,res,next){
       }
     });
   }
+});
+
+app.get('/teams', function(req, res, next) {
+  var context = {};
   mysql.pool.query("SELECT * \
   FROM team;",
   function(err, rows, fields) {
