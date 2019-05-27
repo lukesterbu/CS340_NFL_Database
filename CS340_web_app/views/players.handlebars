@@ -5,7 +5,8 @@
 <br>
 <table id="playerTable" style="width:100%" class="table table-striped">
   <tr>
-    <th>Name</th>
+    <th>First Name</th>
+    <th>Last Name</th>
     <th>Position</th>
     <th>Height</th>
     <th>Weight</th>
@@ -14,13 +15,16 @@
   </tr>
   {{#each results}}
   <tr id={{this.playerID}}>
-    <td>{{this.playerName}}</td>
-    <td>{{this.position}}</td>
-    <td>{{this.height}}</td>
-    <td>{{this.weight}}</td>
-    <td>{{this.teamName}}</td>
-    <td><button>Delete</button><button>Update</button></td>
+    <td id="firstName" contenteditable="true" onblur="editRow()">{{this.firstName}}</td>
+    <td id="lastName" contenteditable="true" onblur="editRow()">{{this.lastName}}</td>
+    <td id="position" contenteditable="true" onblur="editRow()">{{this.position}}</td>
+    <td id="height" contenteditable="true" onblur="editRow()">{{this.height}}</td>
+    <td id="weight" contenteditable="true" onblur="editRow()">{{this.weight}}</td>
+    <td id={{this.teamID}}>{{this.teamName}}</td>
+    <td>
+      <button>Delete</button>
+    </td>
   </tr>
   {{/each}}
 </table>
-<script></script>
+<script src="editTable.js"></script>
