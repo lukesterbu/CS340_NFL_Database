@@ -17,6 +17,16 @@ app.get('/',function(req,res,next){
 
 app.get('/teams',function(req,res,next){
   var context = {};
+  // Handles Delete request
+  if(req.body.type === "delete") {
+    msql.pool.query("DELETE FROM team WHERE id=?", [req.boy.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
   mysql.pool.query("SELECT * \
   FROM team;",
   function(err, rows, fields) {
