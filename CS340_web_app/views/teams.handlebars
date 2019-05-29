@@ -15,14 +15,16 @@
   </tr>
   {{#each results}}
   <tr id={{this.teamID}}>
-    <td>{{this.location}}</td>
-    <td>{{this.name}}</td>
-    <td>{{this.year_founded}}</td>
-    <td>{{this.majority_owner}}</td>
-    <td>{{this.conference}}</td>
-    <td>{{this.division}}</td>
-    <td><button>Delete</button><button>Update</button></td>
+    <td id="location" contenteditable="true" onblur="editTeamRow()">{{this.location}}</td>
+    <td id="name" contenteditable="true" onblur="editTeamRow()">{{this.name}}</td>
+    <td id="year_founded" contenteditable="true" onblur="editTeamRow()">{{this.year_founded}}</td>
+    <td id="majority_owner" contenteditable="true" onblur="editTeamRow()">{{this.majority_owner}}</td>
+    <td id="conference" contenteditable="true" onblur="editTeamRow()">{{this.conference}}</td>
+    <td id="division" contenteditable="true" onblur="editTeamRow()">{{this.division}}</td>
+    <td>
+      <input type="button" value="Delete" onclick="deleteTeamRow()">
+    </td>
   </tr>
   {{/each}}
 </table>
-<script></script>
+<script src="editTable.js"></script>

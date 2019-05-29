@@ -7,6 +7,9 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('client'));
+app.use(bodyParser.json());
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
@@ -15,7 +18,29 @@ app.get('/',function(req,res,next){
     res.render('home');
 });
 
-app.get('/teams',function(req,res,next){
+app.post('/teams', function(req, res, next) {
+  if(req.body.type === "delete") {
+    mysql.pool.query("DELETE FROM team WHERE teamID=?", [req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
+  else if(req.body.type === "edit") {
+    mysql.pool.query("UPDATE team SET " + [req.body.attribute] + "=? WHERE teamID=?", 
+    [req.body.data, req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
+});
+
+app.get('/teams', function(req, res, next) {
   var context = {};
   mysql.pool.query("SELECT * \
   FROM team;",
@@ -56,8 +81,8 @@ app.post('/teams-new',function(req,res,next){
 });
 
 app.get('/players',function(req,res,next) {
-  var context = {};
-  mysql.pool.query("SELECT p.playerID, CONCAT (p.firstName, ' ', p.lastName) AS playerName, p.position, p.height, p.weight, CONCAT (t.location, ' ', t.name) AS teamName \
+  var context = {"teams": "{}"};
+  mysql.pool.query("SELECT p.playerID, p.firstName, p.lastName, p.position, p.height, p.weight, t.teamID, CONCAT (t.location, ' ', t.name) AS teamName \
   FROM player p \
   LEFT JOIN team t \
   ON p.teamID = t.teamID;",
@@ -67,18 +92,43 @@ app.get('/players',function(req,res,next) {
       return;
     }
     context.results = rows;
-    res.render('players', context);
+    mysql.pool.query("SELECT teamID AS tID, CONCAT(location, ' ', name) AS tName \
+    FROM team;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.teams = rows;
+      res.render('players', context);
+    });
   });
 });
 
-app.post('/players-delete',function(req,res,next){
-  
-    res.render('players');
-});
-
-app.post('/players-update',function(req,res,next){
-  
-    res.render('players');
+app.post('/players', function(req, res, next) {
+  // Handles free agent
+  if (req.body.data === "-1") {
+    req.body.data = null;
+  }
+  if(req.body.type === "delete") {
+    mysql.pool.query("DELETE FROM player WHERE playerID=?", [req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
+  else if(req.body.type === "edit") {
+    mysql.pool.query("UPDATE player SET " + [req.body.attribute] + "=? WHERE playerID=?", 
+    [req.body.data, req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
 });
 
 app.get('/players-new',function(req,res,next){
@@ -96,6 +146,7 @@ app.get('/players-new',function(req,res,next){
 });
 
 app.post('/players-new',function(req,res,next){
+  // Handles free agent
   if (req.body.team === "-1") {
     req.body.team = null;
   }
@@ -159,7 +210,7 @@ app.get('/players-search',function(req,res,next){
 
 app.get('/coaches',function(req,res,next){
   var context = {};
-  mysql.pool.query("SELECT c.coachID, CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
+  mysql.pool.query("SELECT c.coachID, c.firstName, c.lastName, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
   FROM coach c \
   LEFT JOIN team t \
   ON c.teamID = t.teamID;",
@@ -169,8 +220,44 @@ app.get('/coaches',function(req,res,next){
       return;
     }
     context.results = rows;
-    res.render('coaches', context);
+    mysql.pool.query("SELECT teamID AS tID, CONCAT(location, ' ', name) AS tName \
+    FROM team;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.teams = rows;
+      res.render('coaches', context);
+    });
   });
+});
+
+// Needs to be updated
+app.post('/coaches',function(req,res,next){
+  // Handles free agent
+  if (req.body.data === "-1") {
+    req.body.data = null;
+  }
+  if(req.body.type === "delete") {
+    mysql.pool.query("DELETE FROM coach WHERE coachID=?", [req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
+  else if(req.body.type === "edit") {
+    mysql.pool.query("UPDATE coach SET " + [req.body.attribute] + "=? WHERE coachID=?", 
+    [req.body.data, req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
 });
 
 app.get('/coaches-new',function(req,res,next){
