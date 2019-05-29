@@ -81,7 +81,7 @@ app.post('/teams-new',function(req,res,next){
 });
 
 app.get('/players',function(req,res,next) {
-  var context = {};
+  var context = {"teams": "{}"};
   mysql.pool.query("SELECT p.playerID, p.firstName, p.lastName, p.position, p.height, p.weight, t.teamID, CONCAT (t.location, ' ', t.name) AS teamName \
   FROM player p \
   LEFT JOIN team t \
@@ -92,24 +92,43 @@ app.get('/players',function(req,res,next) {
       return;
     }
     context.results = rows;
-    res.render('players', context);
+    mysql.pool.query("SELECT teamID AS tID, CONCAT(location, ' ', name) AS tName \
+    FROM team;",
+    function(err, rows, fields) {
+      if(err) {
+        next(err);
+        return;
+      }
+      context.teams = rows;
+      res.render('players', context);
+    });
   });
 });
 
-app.get('/players-update', function(req, res, next) {
-  res.render('players-update');
-});
-
-app.post('/players-update', function(req, res, next) {
-  mysql.pool.query("SELECT * \
-  FROM player WHERE playerID=?", [req.body.playerID],
-  function(err, rows, fields) {
-    if(err) {
-      next(err);
-      return;
-    }
-    res.send(JSON.stringify(rows));
-  });
+app.post('/players', function(req, res, next) {
+  // Handles free agent
+  if (req.body.data === "-1") {
+    req.body.data = null;
+  }
+  if(req.body.type === "delete") {
+    mysql.pool.query("DELETE FROM player WHERE playerID=?", [req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
+  else if(req.body.type === "edit") {
+    mysql.pool.query("UPDATE player SET " + [req.body.attribute] + "=? WHERE playerID=?", 
+    [req.body.data, req.body.rowId],
+    function(err, result) {
+      if(err) {
+        next(err);
+        return;
+      }
+    });
+  }
 });
 
 app.get('/players-new',function(req,res,next){
@@ -127,6 +146,7 @@ app.get('/players-new',function(req,res,next){
 });
 
 app.post('/players-new',function(req,res,next){
+  // Handles free agent
   if (req.body.team === "-1") {
     req.body.team = null;
   }

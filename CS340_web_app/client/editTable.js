@@ -18,7 +18,6 @@ function editTeamRow() {
 	var payload = {};
 	var tr = event.target.parentNode;
 	payload.data = event.target.textContent;
-	console.log(event.target.id);
 	payload.attribute = event.target.id;
 	payload.type = "edit";
 	payload.rowId = tr.id;
@@ -29,7 +28,6 @@ function editTeamRow() {
 	req.send(JSON.stringify(payload));
 }
 
-// Needs to be Updated
 // Deletes the selected row from the table and mysql databse
 function deletePlayerRow() {
 	// Remove the row from the table
@@ -46,12 +44,10 @@ function deletePlayerRow() {
 	req.send(JSON.stringify(payload));
 }
 
-// Needs to be Updated
 function editPlayerRow() {
 	var payload = {};
 	var tr = event.target.parentNode;
 	payload.data = event.target.textContent;
-	console.log(event.target.id);
 	payload.attribute = event.target.id;
 	payload.type = "edit";
 	payload.rowId = tr.id;
@@ -62,25 +58,17 @@ function editPlayerRow() {
 	req.send(JSON.stringify(payload));
 }
 
-function changePlayerTeam() {
+// Updates position and team for the player table
+function editPlayerDropdown() {
 	var payload = {};
-	var response;
-	var td = event.target.parentNode;
-	var tr = td.parentNode;
-	payload.playerID = tr.id;
+	var tr = event.target.parentNode.parentNode;
+	payload.data = event.target.value;
+	payload.attribute = event.target.parentNode.id;
+	payload.type = "edit";
+	payload.rowId = tr.id;
 	// AJAX request
 	var req = new XMLHttpRequest();
-	req.open("POST", "/players-update", true);
+	req.open("POST", "/players", true);
 	req.setRequestHeader("Content-type", "application/json");
-	req.addEventListener("load", function() {
-		if(req.status >= 200 && req.status < 400) {
-			window.location.href = "/players-update";
-			document = window.document;
-			response = JSON.parse(req.responseText);
-			document.getElementById("firstName").value = "HELLO";
-		}
-		else
-			console.log("Error in network request: " + req.statusText);
-	});
 	req.send(JSON.stringify(payload));
 }

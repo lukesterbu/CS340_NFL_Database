@@ -17,8 +17,8 @@
   <tr id={{this.playerID}}>
     <td id="firstName" contenteditable="true" onblur="editPlayerRow()">{{this.firstName}}</td>
     <td id="lastName" contenteditable="true" onblur="editPlayerRow()">{{this.lastName}}</td>
-    <td id="position" contenteditable="true" onblur="editPlayerRow()">
-      <select name="position">
+    <td id="position">
+      <select onchange="editPlayerDropdown()" name="position">
         <option value={{this.position}}>{{this.position}}</option>
         <option value="Quarterback">Quarterback</option>
         <option value="Running Back">Running Back</option>
@@ -29,10 +29,17 @@
     </td>
     <td id="height" contenteditable="true" onblur="editPlayerRow()">{{this.height}}</td>
     <td id="weight" contenteditable="true" onblur="editPlayerRow()">{{this.weight}}</td>
-    <td>{{this.teamName}}</td>
+    <td id="teamID">
+      <select onchange="editPlayerDropdown()" name="team">
+        <option value={{this.teamID}}>{{this.teamName}}</option>
+        <option value="-1">Free Agent</option>
+        {{#each ../teams}}
+        <option value={{this.tID}}>{{this.tName}}</option>
+        {{/each}}
+    </select>
+    </td>
     <td>
       <input id="delete" type="button" value="Delete" onclick="deletePlayerRow()">
-      <input id="edit" type="button" value="Edit Team" onclick="changePlayerTeam()">
     </td>
   </tr>
   {{/each}}
