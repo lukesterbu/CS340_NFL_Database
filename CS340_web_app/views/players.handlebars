@@ -17,7 +17,16 @@
   <tr id={{this.playerID}}>
     <td id="firstName" contenteditable="true" onblur="editPlayerRow()">{{this.firstName}}</td>
     <td id="lastName" contenteditable="true" onblur="editPlayerRow()">{{this.lastName}}</td>
-    <td id="position" contenteditable="true" onblur="editPlayerRow()">{{this.position}}</td>
+    <td id="position" contenteditable="true" onblur="editPlayerRow()">
+      <select name="position">
+        <option value={{this.position}}>{{this.position}}</option>
+        <option value="Quarterback">Quarterback</option>
+        <option value="Running Back">Running Back</option>
+        <option value="Wide Receiver">Wide Receiver</option>
+        <option value="Tight End">Tight End</option>
+        <option value="Kicker">Kicker</option>
+      </select>
+    </td>
     <td id="height" contenteditable="true" onblur="editPlayerRow()">{{this.height}}</td>
     <td id="weight" contenteditable="true" onblur="editPlayerRow()">{{this.weight}}</td>
     <td>{{this.teamName}}</td>

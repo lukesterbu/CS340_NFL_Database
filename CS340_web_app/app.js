@@ -97,22 +97,10 @@ app.get('/players',function(req,res,next) {
 });
 
 app.get('/players-update', function(req, res, next) {
-  var context = {};
-  mysql.pool.query("SELECT * \
-  FROM player WHERE playerID=?", [req.body.playerID],
-  function(err, rows, fields) {
-    if(err) {
-      next(err);
-      return;
-    }
-    //console.log(rows);
-    context.results = rows;
-    res.render('players-update', context);
-  })
+  res.render('players-update');
 });
 
 app.post('/players-update', function(req, res, next) {
-  var context = {};
   mysql.pool.query("SELECT * \
   FROM player WHERE playerID=?", [req.body.playerID],
   function(err, rows, fields) {
@@ -120,10 +108,8 @@ app.post('/players-update', function(req, res, next) {
       next(err);
       return;
     }
-    console.log(rows);
-    context.results = rows;
-    res.render('players-update', context);
-  })
+    res.send(JSON.stringify(rows));
+  });
 });
 
 app.get('/players-new',function(req,res,next){

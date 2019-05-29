@@ -64,13 +64,23 @@ function editPlayerRow() {
 
 function changePlayerTeam() {
 	var payload = {};
+	var response;
 	var td = event.target.parentNode;
 	var tr = td.parentNode;
 	payload.playerID = tr.id;
 	// AJAX request
 	var req = new XMLHttpRequest();
-	req.open("GET", "/players-update", true);
+	req.open("POST", "/players-update", true);
 	req.setRequestHeader("Content-type", "application/json");
+	req.addEventListener("load", function() {
+		if(req.status >= 200 && req.status < 400) {
+			window.location.href = "/players-update";
+			document = window.document;
+			response = JSON.parse(req.responseText);
+			document.getElementById("firstName").value = "HELLO";
+		}
+		else
+			console.log("Error in network request: " + req.statusText);
+	});
 	req.send(JSON.stringify(payload));
-	//window.location.href = "/players-update";
 }
