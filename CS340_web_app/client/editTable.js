@@ -61,3 +61,16 @@ function editPlayerRow() {
 	req.setRequestHeader("Content-type", "application/json");
 	req.send(JSON.stringify(payload));
 }
+
+function changePlayerTeam() {
+	var payload = {};
+	var td = event.target.parentNode;
+	var tr = td.parentNode;
+	payload.playerID = tr.id;
+	// AJAX request
+	var req = new XMLHttpRequest();
+	req.open("GET", "/players-update", true);
+	req.setRequestHeader("Content-type", "application/json");
+	req.send(JSON.stringify(payload));
+	//window.location.href = "/players-update";
+}

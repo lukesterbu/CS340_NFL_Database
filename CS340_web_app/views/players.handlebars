@@ -20,9 +20,10 @@
     <td id="position" contenteditable="true" onblur="editPlayerRow()">{{this.position}}</td>
     <td id="height" contenteditable="true" onblur="editPlayerRow()">{{this.height}}</td>
     <td id="weight" contenteditable="true" onblur="editPlayerRow()">{{this.weight}}</td>
-    <td id={{this.teamID}}>{{this.teamName}}</td>
+    <td>{{this.teamName}}</td>
     <td>
-      <input type="button" value="Delete" onclick="deletePlayerRow()">
+      <input id="delete" type="button" value="Delete" onclick="deletePlayerRow()">
+      <input id="edit" type="button" value="Edit Team" onclick="changePlayerTeam()">
     </td>
   </tr>
   {{/each}}

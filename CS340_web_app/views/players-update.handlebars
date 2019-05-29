@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	<form method="post" class="form-signin">
+		<h2 class="form-signin-heading">Edit Player</h2>
+		<label>First Name</label>
+		<input value={{this.firstName}} type="text" name="firstName" class="form-control" required>
+
+		<label>Last Name</label>
+		<input value={{this.lastName}} type="text" name="lastName" class="form-control" required>
+
+		<label>Position</label>
+		<br>
+		<select name="position">
+			<option value="Quarterback">Quarterback</option>
+			<option value="Running Back">Running Back</option>
+			<option value="Wide Receiver">Wide Receiver</option>
+			<option value="Tight End">Tight End</option>
+			<option value="Kicker">Kicker</option>
+		</select>
+		<br>
+
+		<label>Height (in inches)</label>
+		<input type="number" name="height" class="form-control">
+
+		<label>Weight (in pounds)</label>
+		<input type="number" name="weight" class="form-control">
+
+		<label>team</label>
+		<br>
+		<select name="team">
+			<option value="-1">Free Agent</option>
+			{{#each results}}
+			<option value={{this.teamID}}>{{this.teamName}}</option>
+			{{/each}}
+		</select>
+
+		<br>
+		<br>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Save</button>
+	</form>
