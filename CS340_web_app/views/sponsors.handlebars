@@ -5,6 +5,7 @@
 <table style="width:100%" class="table table-striped">
   <tbody id='sponsorList'>
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Product Type</th>
   </tr>
@@ -12,15 +13,28 @@
 </table>
 <script>
 
+  window.history.pushState("", "", '/sponsors');
+
+
   $.get( '/sponsors-get', function( data ) {
     for (var i=0; i<data.length; i++){
-       						$("#sponsorList").append("<tr><td>" + data[i].name + "</td><td>" + data[i].productType + "</td></tr>");
+       						$("#sponsorList").append(" \
+                                            <tr> \
+                                              <td><button onClick=goToEditPage(" + data[i].sponsorID + ")>Update</button></td> \
+                                              <td>" + data[i].name + "</td> \
+                                              <td>" + data[i].productType + "</td> \
+                                            </tr>");
 
     }
 
 
   });
 
+  function goToEditPage(id, y){
+
+    window.location.replace('../sponsors-update/' + id);
+
+  }
 
 
 </script>

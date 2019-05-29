@@ -1,0 +1,84 @@
+
+<div class="container">	
+
+	<form method="post" class="form-signin">
+		<h2 class="form-signin-heading">Update statistic</h2>
+		<label>Player</label>
+		<div id="playerSelectionDisplay">Search for a player give a sponsorship to</div>
+		<input type="hidden" id="playerSelection" type="val" name="playerID" class="form-control" value={{id}} readonly>
+
+		<label>year</label>
+		<input type="val" name="year" class="form-control" value={{year}} readonly>
+
+		<label >Passing Attempts</label>
+		<input id="pa" type="val" name="passingAttempts" class="form-control">
+
+		<label >Passing Completions</label>
+		<input id="pc" type="val" name="passingCompletions" class="form-control">
+
+		<label >Passing Yards</label>
+		<input id="py" type="val" name="passingYards" class="form-control">
+
+		<label >Passing Touchdowns</label>
+		<input id="pt" type="val" name="passingTouchdowns" class="form-control">
+
+		<label >Receptions</label>
+		<input id="rec" type="val" name="receptions" class="form-control">
+
+		<label >Receiving Yards</label>
+		<input id="recy" type="val" name="receivingYards" class="form-control">
+
+		<label >Receiving Touchdowns</label>
+		<input id="rect" type="val" name="receivingTouchdowns" class="form-control">
+
+		<label >Rushes</label>
+		<input id="rus" type="val" name="rushes" class="form-control">
+
+		<label >Rushing Yards</label>
+		<input id="rusy" type="val" name="rushingYards" class="form-control">
+
+		<label >Rushing Touchdowns</label>
+		<input id="rust" type="val" name="rushingTouchdowns" class="form-control">
+
+		<label >Tackles</label>
+		<input id="t" type="val" name="tackles" class="form-control">
+
+		<label >Sacks</label>
+		<input id="s" type="val" name="sacks" class="form-control">
+
+		<label >Interceptions</label>
+		<input id="i" type="val" name="interceptions" class="form-control">
+
+		<br>
+		<br>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Submit</button>
+	</form>
+
+{{id}}
+	
+	<script>
+
+$.get( "../../stats-get/" + 	{{id}} + "/" + {{year}}, function( data ) {
+
+	$("#playerSelectionDisplay").text(data[0].playerName)
+
+	$("#pa").val(data[0].passingattempts)
+	$("#pc").val(data[0].passingcompletions)
+	$("#py").val(data[0].passingyards)
+	$("#pt").val(data[0].passingtouchdowns)
+	$("#rec").val(data[0].receptions)
+	$("#recy").val(data[0].receivingyards)
+	$("#rect").val(data[0].receivingtouchdowns)
+	$("#rus").val(data[0].rushes)
+	$("#rusy").val(data[0].rushingyards)
+	$("#rust").val(data[0].rushingtouchdowns)
+	$("#t").val(data[0].tackles)
+	$("#s").val(data[0].sacks)
+	$("#i").val(data[0].interceptions)
+
+
+});
+
+
+</script>
