@@ -4,28 +4,44 @@
 <br>
 <table  style="width:100%" class="table table-striped">
   <tr id='sponsorship-grid'>
+    <th></th>
     <th>Player Name</th>
     <th>Sponsor</th>
     <th></th>
   </tr>
 </table>
 <script>
+
+  window.history.pushState("", "", '/sponsorships');
+
+
   $.get( '/sponsorships-get', function( data ) {
+
+    console.log(data)
     for (var i=0; i<data.length; i++){
          $("#sponsorship-grid").after(" \
                                       <tr> \
+                                          <td><button onClick=goToEditPage(" + data[i].playerid + ',' + data[i].sponsorID + ")>Update</button></td> \
                                           <td>" + data[i].playerName + "</td> \
                                           <td>" + data[i].sponsorName + "</td> \
-                                          <td><button onClick = 'deleteRow (" + data[i].playerid + ")'>delete</button></td> \
+                                          <td><button onClick = 'deleteRow (" + data[i].playerid + ',' + data[i].sponsorID + ")'>delete</button></td> \
                                       </tr>"
                                       );
     }
 
   });
 
-  function deleteRow (idToDelete){
-    console.log("deleting: " + idToDelete)
+  function deleteRow (playerID, sponsorID){
+
+    $.post( '/sponsorships-delete/' + playerID + '/' + sponsorID, function( data ) {
+      location.reload();
+    });
   }
 
+  function goToEditPage(playerid, sponsorid){
+
+    window.location.replace('../sponsorships-update/' + playerid + '/' + sponsorid);
+
+  }
 
 </script>

@@ -475,6 +475,20 @@ app.post('/stats-new',function(req,res,next){
   });
 });
 
+app.post('/stats-delete/:playerID/:year',function(req,res,next){
+  var query = mysql.pool.query(" \
+                            DELETE FROM seasonStatistics \
+                          WHERE playerid = ? AND year = ? ;", 
+                          [req.params.playerID, req.params.year], function(err, result){
+                          console.log(query.sql)
+    if(err){
+      next(err);
+      return;
+    }
+    res.render('stats');
+  });
+});
+
 app.post('/stats-new',function(req,res,next){
   
     res.render('stats');
@@ -544,7 +558,7 @@ app.get('/sponsors-get/:id',function(req,res,next){
   var query = mysql.pool.query("SELECT * FROM   corporateSponsor  where sponsorid = " + req.params.id + ";", [], 
     function(err, result){
 
-      console.log(query)
+      // console.log(query)
 
       if(err){
         next(err);
@@ -552,6 +566,20 @@ app.get('/sponsors-get/:id',function(req,res,next){
       }
       res.json(result);
     });
+});
+
+app.post('/sponsors-delete/:sponsorID',function(req,res,next){
+  var query = mysql.pool.query(" \
+                            DELETE FROM corporateSponsor \
+                          WHERE sponsorid = ? ;", 
+                          [req.params.sponsorID], function(err, result){
+                          console.log(query.sql)
+    if(err){
+      next(err);
+      return;
+    }
+    res.render('sponsors');
+  });
 });
 
 app.get('/sponsorships',function(req,res,next){
@@ -562,13 +590,39 @@ app.get('/sponsorships',function(req,res,next){
 app.get('/sponsorships-get',function(req,res,next){
   mysql.pool.query("SELECT p.playerid, \
                     CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
-                    cs.name                      AS sponsorName \
+                    cs.name                      AS sponsorName, \
+                    cs.sponsorid AS sponsorID \
                     FROM   sponsoredPlayers sp \
                           inner join player p \
                                   ON sp.playerid = p.playerid \
                           inner join corporateSponsor cs \
                                   ON sp.sponsorid = cs.sponsorid;", [], 
     function(err, result){
+      if(err){
+        next(err);
+        return;
+      }
+      res.json(result);
+    });
+});
+
+app.get('/sponsorships-get/:playerID/:sponsorID',function(req,res,next){
+  var query = mysql.pool.query("SELECT p.playerid, \
+                    CONCAT (p.firstname, ' ', p.lastname) AS playerName, \
+                    cs.name                      AS sponsorName, \
+                    cs.sponsorid AS sponsorID \
+                    FROM   sponsoredPlayers sp \
+                          inner join player p \
+                                  ON sp.playerid = p.playerid \
+                          inner join corporateSponsor cs \
+                                  ON sp.sponsorid = cs.sponsorid \
+                                  WHERE p.playerid = ? and sp.sponsorid = ?;", [req.params.playerID, req.params.sponsorID], 
+    function(err, result){
+
+      // console.log(req.body)
+
+      // console.log(query.sql)
+
       if(err){
         next(err);
         return;
@@ -584,8 +638,10 @@ app.get('/sponsorships-new',function(req,res,next){
 
 app.post('/sponsorships-new',function(req,res,next){
     var query = mysql.pool.query(" \
-                    INSERT INTO sponsoredPlayers (playerid, sponsorid) \
+                    INSERT INTO sponsoredPlayers (playerID, sponsorID) \
                     VALUES      (?, ?);", [req.body.playerID, req.body.sponsorID], function(err, result){
+
+    // console.log(query.sql)
 
     if(err){
       next(err);
@@ -595,68 +651,42 @@ app.post('/sponsorships-new',function(req,res,next){
   });
 });
 
-// app.get('/insert',function(req,res,next){
-//   
-//   mysql.pool.query("INSERT INTO todo (`name`) VALUES (?)", [req.query.c], function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     context.results = "Inserted id " + result.insertId;
-//     res.render('home',context);
-//   });
-// });
 
-// app.get('/delete',function(req,res,next){
-//   
-//   mysql.pool.query("DELETE FROM todo WHERE id=?", [req.query.id], function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     context.results = "Deleted " + result.changedRows + " rows.";
-//     res.render('home',context);
-//   });
-// });
+app.get('/sponsorships-update/:playerID/:sponsorID',function(req,res,next){
+  
+  res.render('sponsorships-update', {playerID: req.params.playerID, sponsorID: req.params.sponsorID});
+});
 
+app.post('/sponsorships-update/:playerID/:sponsorID',function(req,res,next){
+  var query = mysql.pool.query(" \
+                            UPDATE sponsoredPlayers \
+                            SET \
+                            sponsorid = ? \
+                          WHERE playerid = ? AND sponsorid = ? ;", 
+                          [req.body.sponsorID, req.body.playerID, req.params.sponsorID], function(err, result){
 
-// app.get('/simple-update',function(req,res,next){
-//   
-//   mysql.pool.query("UPDATE todo SET name=?, done=?, due=? WHERE id=? ",
-//     [req.query.name, req.query.done, req.query.due, req.query.id],
-//     function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     context.results = "Updated " + result.changedRows + " rows.";
-//     res.render('home',context);
-//   });
-// });
+                            console.log(query.sql)
+  if(err){
+    next(err);
+    return;
+  }
+  res.render('sponsorships');
+});
+});
 
-// app.get('/safe-update',function(req,res,next){
-//   
-//   mysql.pool.query("SELECT * FROM todo WHERE id=?", [req.query.id], function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     if(result.length == 1){
-//       var curVals = result[0];
-//       mysql.pool.query("UPDATE todo SET name=?, done=?, due=? WHERE id=? ",
-//         [req.query.name || curVals.name, req.query.done || curVals.done, req.query.due || curVals.due, req.query.id],
-//         function(err, result){
-//         if(err){
-//           next(err);
-//           return;
-//         }
-//         context.results = "Updated " + result.changedRows + " rows.";
-//         res.render('home',context);
-//       });
-//     }
-//   });
-// });
-
+app.post('/sponsorships-delete/:playerID/:sponsorID',function(req,res,next){
+  var query = mysql.pool.query(" \
+                            DELETE FROM sponsoredPlayers \
+                          WHERE playerid = ? AND sponsorid = ? ;", 
+                          [req.params.playerID, req.params.sponsorID], function(err, result){
+                          console.log(query.sql)
+    if(err){
+      next(err);
+      return;
+    }
+    res.render('sponsorships');
+  });
+});
 
 
 app.use(function(req,res){

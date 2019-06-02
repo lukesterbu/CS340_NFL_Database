@@ -1,0 +1,53 @@
+
+<div class="container">
+	
+	<form method="post" class="form-signin">
+		<h2 class="form-signin-heading">Update sponsorship</h2>
+		<label>Player</label>
+		<div id="playerSelectionDisplay"></div>
+		<input type="hidden" id="playerSelection" type="text" name="playerID" class="form-control"  readonly>
+
+		<label>Sponsor</label>
+		<br>
+		<select id="sponsorIDList" name="sponsorID">
+		</select>
+
+		<br>
+		<br>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Submit</button>
+	</form>
+
+	<script>
+		$( document ).ready(function() {
+
+			$.get( '/sponsorships-get/' + {{playerID}} + '/' + {{sponsorID}}, function( data1 ) {
+
+
+				$("#playerSelectionDisplay").text(data1[0].playerName);
+				$("#playerSelection").val(data1[0].playerid);
+
+
+				$.get( '/sponsors-get', function( data ) {
+					for (var i=0; i<data.length; i++){
+												$("#sponsorIDList").append("<option value='" + data[i].sponsorID + "'>" + data[i].name + "</option>");
+
+					}
+
+				$("#sponsorIDList").val(data1[0].sponsorID);
+
+					console.log(data)
+
+				});
+
+			});
+
+
+
+
+		});
+
+
+
+
+</script>

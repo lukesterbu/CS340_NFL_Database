@@ -6,6 +6,7 @@
   <tbody id='sponsorList'>
   <tr>
     <th></th>
+    <th></th>
     <th>Name</th>
     <th>Product Type</th>
   </tr>
@@ -21,6 +22,7 @@
        						$("#sponsorList").append(" \
                                             <tr> \
                                               <td><button onClick=goToEditPage(" + data[i].sponsorID + ")>Update</button></td> \
+                                              <td><button onClick = 'deleteRow ("+ data[i].sponsorID + ")'>delete</button></td> \
                                               <td>" + data[i].name + "</td> \
                                               <td>" + data[i].productType + "</td> \
                                             </tr>");
@@ -29,6 +31,13 @@
 
 
   });
+
+  function deleteRow ( sponsorID){
+
+    $.post( '/sponsors-delete/' + sponsorID, function( data ) {
+      location.reload();
+    });
+  }
 
   function goToEditPage(id, y){
 
