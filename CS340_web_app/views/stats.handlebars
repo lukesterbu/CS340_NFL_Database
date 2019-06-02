@@ -5,6 +5,7 @@
 <table id = "statsList" style="width:100%" class="table table-striped">
   <tr>
     <th></th>
+    <th></th>
     <th>Player Name</th>
     <th>Year</th>
     <th>Passing Attempts</th>
@@ -33,6 +34,7 @@
        						$("#statsList").append(
                      "<tr> \
                         <td><button onClick=goToEditPage(" + data[i].playerid + "," +  data[i].year + ")>Update</button></td> \
+                        <td><button onClick = 'deleteRow (" + data[i].playerid + ',' + data[i].year + ")'>delete</button></td> \
                         <td>" + (data[i].playerName || "") + "</td> \
                         <td>" + (data[i].year  || "") + "</td> \
                         <td>" + (data[i].passingattempts  || "") + "</td> \
@@ -61,6 +63,11 @@
 
   }
 
+  function deleteRow (playerID, year){
 
+    $.post( '/stats-delete/' + playerID + '/' + year, function( data ) {
+      location.reload();
+    });
+  }
 
 </script>

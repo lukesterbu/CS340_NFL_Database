@@ -13,7 +13,7 @@ FROM   coach c
 
 -- get all corporate sponsors   
 SELECT * 
-FROM   corporatesponsor; 
+FROM   corporateSponsor; 
 
 -- get all players   
 SELECT playerid, 
@@ -28,7 +28,7 @@ FROM   player p
 
 -- get all season statistics   
 SELECT p.playerid, 
-       p.firstname + ' ' + lastname AS name, 
+       CONCAT (p.firstname, ' ', p.lastname) AS playerName, 
        year, 
        passingattempts, 
        passingcompletions, 
@@ -43,14 +43,15 @@ SELECT p.playerid,
        tackles, 
        sacks, 
        interceptions 
-FROM   seasonstatistics ss 
+FROM   seasonStatistics ss 
        inner join player p 
                ON ss.playerid = p.playerid; 
 
 -- get all sponsored players   
 SELECT p.playerid, 
        CONCAT (p.firstname, ' ', p.lastname) AS playerName, 
-       cs.name                      AS sponsorName 
+       cs.name                      AS sponsorName ,
+        cs.sponsorid AS sponsorID
 FROM   sponsoredPlayers sp 
        inner join player p 
                ON sp.playerid = p.playerid 
@@ -106,7 +107,7 @@ VALUES      ( :firstname,
 
 -- Query for Add new season statistics  
 -- with colon : character being used to denote the variables that will have data from the backend programming 
-INSERT INTO seasonstatistics 
+INSERT INTO seasonStatistics 
             (playerid, 
              year, 
              passingattempts, 
@@ -140,7 +141,7 @@ VALUES      (:playerid,
 
 -- Query for Add new corporate Sponsor 
 -- with colon : character being used to denote the variables that will have data from the backend programming 
-INSERT INTO corporatesponsor 
+INSERT INTO corporateSponsor 
             (name, 
              producttype) 
 VALUES      (:name, 
@@ -148,7 +149,7 @@ VALUES      (:name,
 
 -- Query for Add new corporate Sponsor/player relationship 
 -- with colon : character being used to denote the variables that will have data from the backend programming 
-INSERT INTO sponsoredplayers 
+INSERT INTO sponsoredPlayers 
             (playerid, 
              sponsorid) 
 VALUES      (:playerID, 
@@ -156,9 +157,19 @@ VALUES      (:playerID,
 
 -- Query for deleting corporate Sponsor/player relationship 
 -- with colon : character being used to denote the variables that will have data from the backend programming 
-DELETE FROM sponsoredplayers 
+DELETE FROM sponsoredPlayers 
 WHERE  playerid = :playerID 
        AND sponsorid = :sponsorID; 
+
+-- Query for deleting corporate Sponsor
+-- with colon : character being used to denote the variables that will have data from the backend programming 
+DELETE FROM corporateSponsor
+WHERE sponsorid = :sponsorid ;
+
+-- Query for deleting season stats
+-- with colon : character being used to denote the variables that will have data from the backend programming 
+DELETE FROM seasonStatistics 
+WHERE playerid = :playerid AND year = :year ;
 
 -- Query for deleting player 
 -- with colon : character being used to denote the variables that will have data from the backend programming 
@@ -175,6 +186,40 @@ SET    firstname = :firstname,
        weight = :weight, 
        teamid = :teamid 
 WHERE  playerid = :playerID; 
+
+-- Query for updating season statistics  
+-- with colon : character being used to denote the variables that will have data from the backend programming 
+UPDATE seasonStatistics 
+ SET         playerid = :playerid, 
+             year = :year, 
+             passingattempts = :passingattempts, 
+             passingcompletions = :passingcompletions, 
+             passingyards = :passingyards, 
+             passingtouchdowns = :passingtouchdowns, 
+             receptions = :receptions, 
+             receivingyards = :receivingyards, 
+             receivingtouchdowns = :receivingtouchdowns, 
+             rushes = :rushes, 
+             rushingyards = :rushingyards, 
+             rushingtouchdowns = :rushingtouchdowns, 
+             tackles = :tackles, 
+             sacks = :sacks, 
+             interceptions = :interceptions
+WHERE  playerid = :playerID AND year = :year;
+
+-- Query for updating corporate Sponsor 
+-- with colon : character being used to denote the variables that will have data from the backend programming 
+UPDATE corporateSponsor 
+        SET name = :name, 
+             producttype = :producttype
+WHERE sponsorID = :sponsorID;
+
+-- Query for updating corporate Sponsor/player relationship 
+-- with colon : character being used to denote the variables that will have data from the backend programming 
+UPDATE sponsoredPlayers 
+            SET  
+             sponsorid = :newsponsorid
+WHERE playerid = :playerid AND sponsorid = :sponsorid;
 
 -- query to search for player by first or last name
 -- with colon : character being used to denote the variables that will have data from the backend programming 
