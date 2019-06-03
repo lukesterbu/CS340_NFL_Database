@@ -286,7 +286,7 @@ app.post('/coaches-new',function(req,res,next){
       return;
     }
     var context = {};
-    mysql.pool.query("SELECT c.coachID, CONCAT(c.firstName, ' ', c.lastName) AS name, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
+    mysql.pool.query("SELECT c.coachID, c.firstName, c.lastName, c.title, CONCAT(t.location, ' ', t.name) AS teamName \
     FROM coach c \
     LEFT JOIN team t \
     ON c.teamID = t.teamID;",
@@ -296,7 +296,16 @@ app.post('/coaches-new',function(req,res,next){
         return;
       }
       context.results = rows;
-      res.render('coaches', context);
+      mysql.pool.query("SELECT teamID AS tID, CONCAT(location, ' ', name) AS tName \
+      FROM team;",
+      function(err, rows, fields) {
+        if(err) {
+          next(err);
+          return;
+        }
+        context.teams = rows;
+        res.render('coaches', context);
+      });
     });
   });
 });
