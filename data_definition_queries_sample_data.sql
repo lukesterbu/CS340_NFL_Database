@@ -633,4 +633,12 @@ INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTo
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (232,2018,66,'750',13);
 INSERT INTO seasonStatistics(playerID,year,receptions,receivingYards,receivingTouchdowns) VALUES (93,2018,63,'739',3);
 
+-- INSERT into sponsoredPlayers
+
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (1, 1);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (2, 2);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (3, 3);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (4, 4);
+INSERT INTO sponsoredPlayers(playerID, sponsorID) VALUES (5, 3);
+
 -- END OF FILE
